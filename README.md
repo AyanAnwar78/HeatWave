@@ -2,6 +2,9 @@
 
 **HeatGuard** is an Extreme Heatwave Early Warning and Human Thermal Stress Monitoring System prototype built strictly using core Django features according to the classroom curriculum.
 
+> [!NOTE]
+> For a comprehensive overview of why this project was built, its full feature breakdown, user roles and permissions matrix, and future roadmap, see [PROJECT_DOCUMENTATION.md](PROJECT_DOCUMENTATION.md).
+
 ## Demo Accounts
 
 Create the `demouser`, `staffuser`, and Weather Authority Staff permission group with:
