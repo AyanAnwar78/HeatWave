@@ -7,12 +7,11 @@
     maxZoom: 12
   });
 
-  // Use the community-hosted OSM Germany raster endpoint. CARTO raster basemaps
-  // now require an API key; this project has no configured CARTO credential.
-  const basemap = L.tileLayer('https://tile.openstreetmap.de/{z}/{x}/{y}.png', {
+  // Standard high-availability OpenStreetMap raster tile layer
+  const basemap = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
-    subdomains: 'abcd',
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+    subdomains: ['a', 'b', 'c'],
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
   }).addTo(map);
 
   let tileErrorShown = false;
