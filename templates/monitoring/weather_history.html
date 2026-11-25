@@ -2,47 +2,142 @@
 {% load utils_tags %}
 
 {% block title %}Weather History - HeatGuard{% endblock %}
+
 {% block content %}
 <div class="card">
     <div class="card-header">
-        <div><h2>Saved Weather History</h2><p>Historical records saved explicitly by users. Page visits are not recorded.</p></div>
-        <a class="btn btn-secondary" href="{% url 'monitoring:weather_history_export' %}{% if request.GET %}?{{ request.GET.urlencode }}{% endif %}">Download CSV</a>
-    </div>
-    <form method="get" class="card" style="margin:1rem 0;">
-        <div class="grid-2">
-            <div class="form-group"><label class="form-label" for="{{ form.location.id_for_label }}">Location</label>{{ form.location }}</div>
-            <div class="form-group"><label class="form-label" for="{{ form.risk_level.id_for_label }}">Risk level</label>{{ form.risk_level }}</div>
-            <div class="form-group"><label class="form-label" for="{{ form.start_date.id_for_label }}">From date (IST)</label>{{ form.start_date }}{{ form.start_date.errors }}</div>
-            <div class="form-group"><label class="form-label" for="{{ form.end_date.id_for_label }}">Through date (IST)</label>{{ form.end_date }}{{ form.end_date.errors }}</div>
+        <div>
+            <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
+                <h2 style="margin: 0; font-size: 1.85rem; font-weight: 800; color: #ffffff;">
+                    Saved Weather History
+                </h2>
+                <span class="tag-provenance"><i class="fa-solid fa-clock-rotate-left"></i> historical archive</span>
+            </div>
+            <p style="margin: 0.35rem 0 0; color: var(--color-text-muted); font-size: 0.9rem;">
+                Historical records saved explicitly by users. Page visits are not recorded.
+            </p>
         </div>
-        <button class="btn btn-primary" type="submit">Filter history</button>
-        <a class="btn btn-secondary" href="{% url 'monitoring:weather_history' %}">Clear filters</a>
-    </form>
-    <div class="grid-2" style="margin:1rem 0;">
-        <div class="card"><strong>{{ record_count }}</strong><div>Matching saved records</div></div>
-        <div class="card"><strong>{{ provider_count }} provider / {{ user_entered_count }} user-entered</strong><div>Data provenance</div></div>
-        <div class="card"><strong>{% if average_temperature is not None %}{{ average_temperature|temp_display:temp_unit }}{% else %}Unavailable{% endif %}</strong><div>Average temperature</div></div>
-        <div class="card"><strong>{% if maximum_heat_index is not None %}{{ maximum_heat_index|temp_display:temp_unit }}{% else %}Unavailable{% endif %}</strong><div>Peak recorded Heat Index</div></div>
+        <a class="btn btn-secondary" href="{% url 'monitoring:weather_history_export' %}{% if request.GET %}?{{ request.GET.urlencode }}{% endif %}">
+            <i class="fa-solid fa-file-arrow-down"></i> Download CSV
+        </a>
     </div>
-    <p>Highest recorded air temperature: {% if maximum_temperature is not None %}{{ maximum_temperature|temp_display:temp_unit }}{% else %}Unavailable{% endif %}</p>
-    <p class="alert alert-info">Provider-supplied readings are labeled separately from unverified user reports. User reports are historical submissions and do not feed live forecasts or official notices.</p>
+
+    <!-- Filter Form -->
+    <form method="get" class="card" style="background: rgba(15, 23, 42, 0.6); border: 1px solid var(--color-border); margin: 1.5rem 0; padding: 1.5rem;">
+        <div class="grid-2" style="margin-bottom: 1.25rem;">
+            <div class="form-group">
+                <label class="form-label" for="{{ form.location.id_for_label }}" style="font-weight: 700; color: #ffffff;">Location</label>
+                {{ form.location }}
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="{{ form.risk_level.id_for_label }}" style="font-weight: 700; color: #ffffff;">Risk level</label>
+                {{ form.risk_level }}
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="{{ form.start_date.id_for_label }}" style="font-weight: 700; color: #ffffff;">From date (IST)</label>
+                {{ form.start_date }}{{ form.start_date.errors }}
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="{{ form.end_date.id_for_label }}" style="font-weight: 700; color: #ffffff;">Through date (IST)</label>
+                {{ form.end_date }}{{ form.end_date.errors }}
+            </div>
+        </div>
+        <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+            <button class="btn btn-primary" type="submit">
+                <i class="fa-solid fa-filter"></i> Filter history
+            </button>
+            <a class="btn btn-secondary" href="{% url 'monitoring:weather_history' %}">
+                <i class="fa-solid fa-xmark"></i> Clear filters
+            </a>
+        </div>
+    </form>
+
+    <!-- Stats Grid -->
+    <div class="grid-4" style="margin: 1.5rem 0;">
+        <div class="card dashboard-telemetry-card">
+            <div class="dashboard-telemetry-value" style="font-size: 2rem; color: #38bdf8;">{{ record_count }}</div>
+            <div class="dashboard-telemetry-meta">Matching saved records</div>
+        </div>
+        <div class="card dashboard-telemetry-card">
+            <div style="font-size: 1.15rem; font-weight: 700; color: #ffffff; margin: 0.5rem 0 0.25rem;">
+                {{ provider_count }} <span style="font-size: 0.8rem; color: var(--color-text-muted);">provider</span> / {{ user_entered_count }} <span style="font-size: 0.8rem; color: var(--color-text-muted);">user</span>
+            </div>
+            <div class="dashboard-telemetry-meta">Data provenance split</div>
+        </div>
+        <div class="card dashboard-telemetry-card">
+            <div class="dashboard-telemetry-value" style="font-size: 2rem; color: #fb923c;">
+                {% if average_temperature is not None %}{{ average_temperature|temp_display:temp_unit }}{% else %}Unavailable{% endif %}
+            </div>
+            <div class="dashboard-telemetry-meta">Average temperature</div>
+        </div>
+        <div class="card dashboard-telemetry-card">
+            <div class="dashboard-telemetry-value" style="font-size: 2rem; color: #ea580c;">
+                {% if maximum_heat_index is not None %}{{ maximum_heat_index|temp_display:temp_unit }}{% else %}Unavailable{% endif %}
+            </div>
+            <div class="dashboard-telemetry-meta">Peak recorded Heat Index</div>
+        </div>
+    </div>
+
+    <div class="alert alert-info" style="margin: 1.5rem 0;">
+        <i class="fa-solid fa-shield-halved alert-icon" style="color: #38bdf8;"></i>
+        <div class="alert-body">
+            <strong>Data Integrity:</strong> Provider-supplied readings are labeled separately from unverified user reports. User reports are historical submissions and do not feed live forecasts or official notices.
+        </div>
+    </div>
+
     {% if records %}
-    <div class="table-responsive"><table class="data-table">
-        <thead><tr><th>Observed</th><th>Location</th><th>Temperature</th><th>Humidity</th><th>Heat Index</th><th>Risk</th><th>Source</th></tr></thead>
-        <tbody>{% for record in records %}
-            <tr>
-                <td>{{ record.recorded_at|date:"Y-m-d H:i" }} IST</td>
-                <td>{{ record.location.name }}, {{ record.location.country }}</td>
-                <td>{% if record.temperature_c is not None %}{{ record.temperature_c|temp_display:temp_unit }}{% else %}Unavailable{% endif %}</td>
-                <td>{% if record.relative_humidity is not None %}{{ record.relative_humidity }}%{% else %}Unavailable{% endif %}</td>
-                <td>{% if record.heat_index_c is not None %}{{ record.heat_index_c|temp_display:temp_unit }}{% else %}Unavailable{% endif %}</td>
-                <td>{% if record.risk_level %}{{ record.get_risk_level_display }}{% else %}Not assessed{% endif %}</td>
-                <td><span class="tag-provenance">{{ record.get_data_source_display }}</span></td>
-            </tr>
-        {% endfor %}</tbody>
-    </table></div>
-    {% else %}<p>No saved weather records match these filters.</p>{% endif %}
+    <div class="table-responsive" style="margin-bottom: 1.5rem;">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Observed</th>
+                    <th>Location</th>
+                    <th>Temperature</th>
+                    <th>Humidity</th>
+                    <th>Heat Index</th>
+                    <th>Risk</th>
+                    <th>Source</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for record in records %}
+                    <tr>
+                        <td>{{ record.recorded_at|date:"Y-m-d H:i" }} IST</td>
+                        <td><strong style="color: #ffffff;">{{ record.location.name }}</strong>, {{ record.location.country }}</td>
+                        <td style="font-weight: 700; color: #fb923c;">{% if record.temperature_c is not None %}{{ record.temperature_c|temp_display:temp_unit }}{% else %}Unavailable{% endif %}</td>
+                        <td>{% if record.relative_humidity is not None %}{{ record.relative_humidity }}%{% else %}Unavailable{% endif %}</td>
+                        <td style="font-weight: 700;">{% if record.heat_index_c is not None %}{{ record.heat_index_c|temp_display:temp_unit }}{% else %}Unavailable{% endif %}</td>
+                        <td>
+                            {% if record.risk_level %}
+                                <span class="badge {% if record.risk_level == 'NORMAL' %}risk-low{% elif record.risk_level == 'CAUTION' %}risk-moderate{% elif record.risk_level == 'EXTREME_CAUTION' %}risk-high{% elif record.risk_level == 'DANGER' %}risk-very-high{% else %}risk-extreme{% endif %}">
+                                    {{ record.get_risk_level_display }}
+                                </span>
+                            {% else %}
+                                Not assessed
+                            {% endif %}
+                        </td>
+                        <td><span class="tag-provenance">{{ record.get_data_source_display }}</span></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+        {% include 'monitoring/partials/state_box.html' with title="No Records Found" message="No saved weather records match the selected filters." %}
+    {% endif %}
+
     {% include 'monitoring/partials/pagination.html' with page_obj=page_obj page_param='page' query=page_query %}
-    <div>{% if user.is_authenticated %}<a class="btn btn-primary" href="{% url 'monitoring:manual_observation' %}">Report an observation</a>{% else %}<a class="btn btn-primary" href="{% url 'monitoring:login' %}?next={% url 'monitoring:manual_observation' %}">Sign in to report an observation</a>{% endif %}</div>
+
+    <div style="margin-top: 1.75rem;">
+        {% if user.is_authenticated %}
+            <a class="btn btn-primary" href="{% url 'monitoring:manual_observation' %}">
+                <i class="fa-solid fa-plus"></i> Report an observation
+            </a>
+        {% else %}
+            <a class="btn btn-primary" href="{% url 'monitoring:login' %}?next={% url 'monitoring:manual_observation' %}">
+                <i class="fa-solid fa-right-to-bracket"></i> Sign in to report an observation
+            </a>
+        {% endif %}
+    </div>
 </div>
 {% endblock %}

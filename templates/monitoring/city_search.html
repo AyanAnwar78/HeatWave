@@ -5,63 +5,88 @@
 {% block content %}
 <div class="card">
     <div class="card-header">
-        <h2>Monitor Station Search</h2>
-        <span class="tag-provenance">user-entered</span>
+        <div>
+            <h2 style="margin: 0; font-size: 1.85rem; font-weight: 800; color: #ffffff;">
+                Monitor Station Search
+            </h2>
+            <p style="margin: 0.35rem 0 0; color: var(--color-text-muted); font-size: 0.9rem;">
+                Search active monitoring stations or lookup any global city using Open-Meteo geocoding:
+            </p>
+        </div>
+        <span class="tag-provenance"><i class="fa-solid fa-magnifying-glass"></i> user-entered</span>
     </div>
-    <p>Search active monitoring stations or lookup any global city using Open-Meteo geocoding:</p>
 
     {% if form.non_field_errors %}
         <div class="alert alert-danger" role="alert">
-            {% for error in form.non_field_errors %}
-                <p style="margin: 0;">{{ error }}</p>
-            {% endfor %}
+            <i class="fa-solid fa-triangle-exclamation alert-icon"></i>
+            <div class="alert-body">
+                {% for error in form.non_field_errors %}
+                    <p style="margin: 0;">{{ error }}</p>
+                {% endfor %}
+            </div>
         </div>
     {% endif %}
 
     {% if error_message %}
         <div class="alert alert-warning" role="alert">
-            <strong>Search Status:</strong> {{ error_message }}
-            <p style="margin: 0.25rem 0 0; font-size: 0.85rem;">
-                Please verify spelling or select an existing station from the directory below.
-            </p>
+            <i class="fa-solid fa-circle-exclamation alert-icon"></i>
+            <div class="alert-body">
+                <strong>Search Status:</strong> {{ error_message }}
+                <p style="margin: 0.25rem 0 0; font-size: 0.85rem;">
+                    Please verify spelling or select an existing station from the directory below.
+                </p>
+            </div>
         </div>
     {% endif %}
 
     {% if location_candidates %}
-        <section aria-labelledby="candidate-heading">
-            <h3 id="candidate-heading">Choose the matching location</h3>
-            {% for candidate in location_candidates %}
-                <form method="post" action="{% url 'monitoring:city_search' %}" style="display: inline-block; margin: 0.25rem;">
-                    {% csrf_token %}
-                    <input type="hidden" name="action" value="select_location">
-                    <input type="hidden" name="candidate_index" value="{{ forloop.counter0 }}">
-                    <button type="submit" class="btn btn-secondary">
-                        {{ candidate.name }}{% if candidate.state_or_region %}, {{ candidate.state_or_region }}{% endif %}, {{ candidate.country }}
-                    </button>
-                </form>
-            {% endfor %}
-        </section>
-    {% endif %}
-    {% if matching_locations %}
-        <section aria-labelledby="matches-heading">
-            <h3 id="matches-heading">Select a station</h3>
-            {% for station in matching_locations %}
-                <a class="btn btn-secondary" href="{% url 'monitoring:city_dashboard' location_id=station.id %}">
-                    {{ station.name }}{% if station.state_or_region %}, {{ station.state_or_region }}{% endif %}, {{ station.country }}
-                </a>
-            {% endfor %}
+        <section aria-labelledby="candidate-heading" style="background: rgba(15, 23, 42, 0.7); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 1.25rem; margin-bottom: 1.75rem;">
+            <h3 id="candidate-heading" style="margin: 0 0 0.75rem; font-size: 1.15rem; color: #ffffff; display: flex; align-items: center; gap: 0.45rem;">
+                <i class="fa-solid fa-location-crosshairs" style="color: #f97316;"></i> Choose matching geocoded location:
+            </h3>
+            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                {% for candidate in location_candidates %}
+                    <form method="post" action="{% url 'monitoring:city_search' %}" style="display: inline-block;">
+                        {% csrf_token %}
+                        <input type="hidden" name="action" value="select_location">
+                        <input type="hidden" name="candidate_index" value="{{ forloop.counter0 }}">
+                        <button type="submit" class="btn btn-secondary" style="border-color: rgba(249, 115, 22, 0.4);">
+                            <i class="fa-solid fa-map-pin" style="color: #f97316;"></i> {{ candidate.name }}{% if candidate.state_or_region %}, {{ candidate.state_or_region }}{% endif %}, {{ candidate.country }}
+                        </button>
+                    </form>
+                {% endfor %}
+            </div>
         </section>
     {% endif %}
 
-    <form method="get" action="{% url 'monitoring:city_search' %}" novalidate style="margin-bottom: 1.5rem;">
-        <div class="form-group" style="max-width: 580px;">
-            <label for="{{ form.city.id_for_label }}" class="form-label">{{ form.city.label }}</label>
-            <div style="display: flex; gap: 0.5rem;">
+    {% if matching_locations %}
+        <section aria-labelledby="matches-heading" style="background: rgba(15, 23, 42, 0.7); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 1.25rem; margin-bottom: 1.75rem;">
+            <h3 id="matches-heading" style="margin: 0 0 0.75rem; font-size: 1.15rem; color: #ffffff; display: flex; align-items: center; gap: 0.45rem;">
+                <i class="fa-solid fa-building" style="color: #38bdf8;"></i> Select a station:
+            </h3>
+            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                {% for station in matching_locations %}
+                    <a class="btn btn-secondary" href="{% url 'monitoring:city_dashboard' location_id=station.id %}">
+                        <i class="fa-solid fa-tower-observation" style="color: #38bdf8;"></i> {{ station.name }}{% if station.state_or_region %}, {{ station.state_or_region }}{% endif %}, {{ station.country }}
+                    </a>
+                {% endfor %}
+            </div>
+        </section>
+    {% endif %}
+
+    <form method="get" action="{% url 'monitoring:city_search' %}" novalidate style="margin-bottom: 2rem;">
+        <div class="form-group" style="max-width: 620px;">
+            <label for="{{ form.city.id_for_label }}" class="form-label" style="font-weight: 700; color: #ffffff; margin-bottom: 0.5rem;">
+                {{ form.city.label }}
+            </label>
+            <div style="display: flex; gap: 0.65rem;">
                 {{ form.city }}
-                <button type="submit" class="btn btn-primary">Search / Geocode</button>
+                <button type="submit" class="btn btn-primary" style="white-space: nowrap;">
+                    <i class="fa-solid fa-magnifying-glass"></i> Search / Geocode
+                </button>
             </div>
             {% if form.city.errors %}
-                <div style="color: #dc2626; font-size: 0.825rem; margin-top: 0.35rem;">
+                <div style="color: #fca5a5; font-size: 0.85rem; margin-top: 0.45rem;">
                     {% for error in form.city.errors %}
                         <div>&bull; {{ error }}</div>
                     {% endfor %}
@@ -71,21 +96,29 @@
     </form>
 
     {% if session_searches %}
-        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 0.75rem 1rem; margin-bottom: 1.5rem;">
-            <div style="font-size: 0.825rem; font-weight: 600; color: var(--color-navy-dark); margin-bottom: 0.4rem;">
-                Recent Searches (Session History):
+        <div style="background: rgba(15, 23, 42, 0.6); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 1rem 1.25rem; margin-bottom: 2rem;">
+            <div style="font-size: 0.85rem; font-weight: 700; color: #ffffff; margin-bottom: 0.65rem; display: flex; align-items: center; gap: 0.45rem;">
+                <i class="fa-solid fa-clock-rotate-left" style="color: #f97316;"></i> Recent Searches (Session History):
             </div>
             <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
                 {% for item in session_searches %}
-                    <a href="{% url 'monitoring:city_dashboard' location_id=item.id %}" class="btn btn-secondary" style="font-size: 0.75rem; padding: 0.2rem 0.5rem;">
-                        {{ item.name }} ({{ item.country }})
+                    <a href="{% url 'monitoring:city_dashboard' location_id=item.id %}" class="btn btn-secondary" style="font-size: 0.8rem; padding: 0.35rem 0.75rem;">
+                        <i class="fa-solid fa-location-dot" style="font-size: 0.75rem; color: #f97316;"></i> {{ item.name }} ({{ item.country }})
                     </a>
                 {% endfor %}
             </div>
         </div>
     {% endif %}
 
-    <h3 style="margin-top: 1.75rem;">Active Monitoring Stations Directory</h3>
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1rem; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.75rem;">
+        <h3 style="margin: 0; font-size: 1.35rem; font-weight: 800; color: #ffffff; display: flex; align-items: center; gap: 0.5rem;">
+            <i class="fa-solid fa-network-wired" style="color: #f97316;"></i> Active Monitoring Stations Directory
+        </h3>
+        <span style="font-size: 0.85rem; color: var(--color-text-muted);">
+            {{ all_stations.count }} registered stations
+        </span>
+    </div>
+
     {% if all_stations %}
         <div class="table-responsive">
             <table class="data-table">
@@ -101,27 +134,29 @@
                 <tbody>
                     {% for station in all_stations %}
                         <tr>
-                            <td><strong>{{ station.name }}</strong></td>
+                            <td>
+                                <strong style="color: #ffffff; font-size: 0.95rem;">{{ station.name }}</strong>
+                            </td>
                             <td>{{ station.state_or_region|default:"—" }}</td>
                             <td>{{ station.country }}</td>
-                            <td>{{ station.latitude }}°, {{ station.longitude }}°</td>
+                            <td style="font-family: ui-monospace, monospace; font-size: 0.825rem; color: var(--color-text-muted);">
+                                {{ station.latitude }}°, {{ station.longitude }}°
+                            </td>
                             <td>
-                                <a href="{% url 'monitoring:city_dashboard' location_id=station.id %}" class="btn btn-secondary">Open Dashboard</a>
+                                <a href="{% url 'monitoring:city_dashboard' location_id=station.id %}" class="btn btn-primary" style="padding: 0.35rem 0.85rem; font-size: 0.8rem;">
+                                    View Live Telemetry <i class="fa-solid fa-arrow-right" style="font-size: 0.75rem;"></i>
+                                </a>
                             </td>
                         </tr>
                     {% endfor %}
                 </tbody>
             </table>
         </div>
+        {% if station_page %}
+            {% include 'monitoring/partials/pagination.html' with page_obj=station_page page_param='directory_page' %}
+        {% endif %}
     {% else %}
-        {% include 'monitoring/partials/state_box.html' with title="No Stations Registered" message="There are currently no monitoring stations saved in the database." %}
-    {% endif %}
-    {% if all_stations.paginator.num_pages > 1 %}
-        <nav aria-label="Location directory pages" style="display:flex;gap:.75rem;justify-content:center;margin-top:1rem;">
-            {% if all_stations.has_previous %}<a class="btn btn-secondary" href="?{% if station_query %}{{ station_query }}&amp;{% endif %}directory_page={{ all_stations.previous_page_number }}">Previous</a>{% endif %}
-            <span>Page {{ all_stations.number }} of {{ all_stations.paginator.num_pages }}</span>
-            {% if all_stations.has_next %}<a class="btn btn-secondary" href="?{% if station_query %}{{ station_query }}&amp;{% endif %}directory_page={{ all_stations.next_page_number }}">Next</a>{% endif %}
-        </nav>
+        {% include 'monitoring/partials/state_box.html' with title="No Stations Configured" message="No monitoring stations have been seeded or registered in the database." %}
     {% endif %}
 </div>
 {% endblock %}

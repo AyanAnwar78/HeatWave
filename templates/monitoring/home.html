@@ -3,186 +3,183 @@
 {% block title %}HeatGuard - Understand Heat. Prepare Earlier.{% endblock %}
 
 {% block content %}
-<!-- Hero Section -->
+<!-- Modern Hero Section -->
 <section class="hero-section" aria-labelledby="hero-title">
-    <h2 id="hero-title" class="hero-heading">Understand Heat. Prepare Earlier.</h2>
+    <div style="display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(249, 115, 22, 0.15); border: 1px solid rgba(249, 115, 22, 0.35); border-radius: 9999px; padding: 0.35rem 1rem; color: #fb923c; font-size: 0.8rem; font-weight: 700; margin-bottom: 1.25rem;">
+        <i class="fa-solid fa-fire-flame-curved"></i> Environmental Heatwave Early Warning
+    </div>
+    <h1 id="hero-title" class="hero-heading">Understand Heat. Prepare Earlier.</h1>
     <p class="hero-subtext">
-        HeatGuard calculates human thermal stress estimates using temperature and relative humidity, tracks multi-day weather outlooks, and centralizes published heatwave notices.
+        Real-time human thermal stress calculation using NOAA Rothfusz apparent temperature formulation, multi-day predictive forecast models, and centralized statutory emergency advisories.
     </p>
 
     <form method="get" action="{% url 'monitoring:city_search' %}" class="hero-search-form" novalidate>
-        <div style="flex: 1;">
+        <div style="flex: 1; position: relative;">
             {{ form.city }}
         </div>
-        <button type="submit" class="btn btn-accent">Monitor City</button>
+        <button type="submit" class="btn btn-accent" style="padding: 0.85rem 1.75rem; font-size: 0.95rem;">
+            <i class="fa-solid fa-magnifying-glass-location"></i> Monitor City
+        </button>
     </form>
-    <p class="hero-hint">Search for registered stations by name (e.g. Central, Coastal, Capital) to view localized telemetry.</p>
+    <p class="hero-hint">Search any global city or station (e.g. <em>Delhi</em>, <em>Mumbai</em>, <em>Guwahati</em>, <em>Prayagraj</em>, <em>Tokyo</em>, <em>London</em>)</p>
 </section>
 
 <!-- Core Product Pillars -->
 <section class="card" aria-labelledby="pillars-title" id="about">
     <div class="card-header">
-        <h3 id="pillars-title">Thermal Stress Monitoring Framework</h3>
+        <div>
+            <h3 id="pillars-title"><i class="fa-solid fa-microchip" style="color: #f97316; margin-right: 0.4rem;"></i> Thermal Stress Monitoring Framework</h3>
+            <div style="font-size: 0.85rem; color: var(--color-text-muted); margin-top: 0.2rem;">Deterministic mathematical assessment without synthetic fallbacks</div>
+        </div>
         <span class="tag-provenance">application-calculated</span>
     </div>
     <div class="grid-3">
-        <div>
-            <h4 style="margin: 0 0 0.5rem; color: var(--color-navy-dark);">Current Conditions</h4>
-            <p style="font-size: 0.9rem; color: var(--color-text-muted); margin: 0;">
-                Calculates the estimated Heat Index from ambient air temperature and relative humidity using the standard NOAA Rothfusz regression equation.
+        <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 1.5rem;">
+            <div style="width: 42px; height: 42px; border-radius: var(--radius-sm); background: rgba(56, 189, 248, 0.12); color: #38bdf8; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; margin-bottom: 1rem;">
+                <i class="fa-solid fa-temperature-half"></i>
+            </div>
+            <h4 style="margin: 0 0 0.5rem; color: #ffffff; font-size: 1.1rem;">Live Telemetry</h4>
+            <p style="font-size: 0.875rem; color: var(--color-text-muted); margin: 0; line-height: 1.6;">
+                Calculates the estimated Heat Index from ambient dry-bulb temperature and relative surface moisture using standard NOAA Rothfusz regression.
             </p>
         </div>
-        <div>
-            <h4 style="margin: 0 0 0.5rem; color: var(--color-navy-dark);">Forecast-Based Estimates</h4>
-            <p style="font-size: 0.9rem; color: var(--color-text-muted); margin: 0;">
-                Reviews upcoming multi-day meteorological patterns from Open-Meteo to anticipate rising humidity and temperature extremes before they peak.
+        <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 1.5rem;">
+            <div style="width: 42px; height: 42px; border-radius: var(--radius-sm); background: rgba(249, 115, 22, 0.12); color: #f97316; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; margin-bottom: 1rem;">
+                <i class="fa-solid fa-chart-line"></i>
+            </div>
+            <h4 style="margin: 0 0 0.5rem; color: #ffffff; font-size: 1.1rem;">Multi-Day Projections</h4>
+            <p style="font-size: 0.875rem; color: var(--color-text-muted); margin: 0; line-height: 1.6;">
+                Continuous 24-hour hourly curve and 7-day outlook to detect cumulative thermal stress and humidity spikes before they peak.
             </p>
         </div>
-        <div>
-            <h4 style="margin: 0 0 0.5rem; color: var(--color-navy-dark);">Official Advisories</h4>
-            <p style="font-size: 0.9rem; color: var(--color-text-muted); margin: 0;">
-                Centralizes published meteorological advisories, health alerts, and emergency bulletins issued by recognized meteorological departments.
+        <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 1.5rem;">
+            <div style="width: 42px; height: 42px; border-radius: var(--radius-sm); background: rgba(239, 68, 68, 0.12); color: #f87171; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; margin-bottom: 1rem;">
+                <i class="fa-solid fa-shield-virus"></i>
+            </div>
+            <h4 style="margin: 0 0 0.5rem; color: #ffffff; font-size: 1.1rem;">Official Bulletins</h4>
+            <p style="font-size: 0.875rem; color: var(--color-text-muted); margin: 0; line-height: 1.6;">
+                Verified statutory advisories, watches, and heat emergency alerts published with issuing organization attribution and validity windows.
             </p>
         </div>
     </div>
 </section>
 
-<!-- Feature Cards -->
-<section style="margin-bottom: 2rem;" aria-labelledby="features-title">
-    <h3 id="features-title" style="margin-bottom: 1rem; color: var(--color-navy-dark);">Platform Capabilities</h3>
+<!-- Feature Navigation Grid -->
+<section style="margin-bottom: 2.5rem;" aria-labelledby="features-title">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
+        <h3 id="features-title" style="margin: 0; color: #ffffff; font-size: 1.35rem; font-weight: 800;">
+            <i class="fa-solid fa-cubes-stacked" style="color: #f97316; margin-right: 0.4rem;"></i> Integrated Capabilities
+        </h3>
+    </div>
     <div class="grid-3">
         <div class="card" style="margin-bottom: 0;">
-            <div class="card-header">
-                <h4 style="margin: 0;">City Monitoring</h4>
+            <div class="card-header" style="margin-bottom: 1rem; padding-bottom: 0.85rem;">
+                <h4 style="margin: 0; font-size: 1.1rem; display: flex; align-items: center; gap: 0.5rem;">
+                    <i class="fa-solid fa-tower-broadcast" style="color: #38bdf8;"></i> Station Monitor
+                </h4>
             </div>
-            <p style="font-size: 0.875rem; color: var(--color-text-muted);">
-                Detailed telemetry dashboard tracking localized ground observations and temporal humidity shifts.
+            <p style="font-size: 0.875rem; color: var(--color-text-muted); line-height: 1.6;">
+                Localized ground telemetry tracking hourly moisture shifts, temperature records, and personal bookmarks.
             </p>
-            <a href="{% url 'monitoring:city_search' %}" class="btn btn-secondary" style="margin-top: 0.5rem;">Access Stations</a>
+            <a href="{% url 'monitoring:city_search' %}" class="btn btn-secondary" style="margin-top: 0.75rem; width: 100%;">
+                Access Stations <i class="fa-solid fa-arrow-right"></i>
+            </a>
         </div>
 
         <div class="card" style="margin-bottom: 0;">
-            <div class="card-header">
-                <h4 style="margin: 0;">Heat Index Estimate</h4>
+            <div class="card-header" style="margin-bottom: 1rem; padding-bottom: 0.85rem;">
+                <h4 style="margin: 0; font-size: 1.1rem; display: flex; align-items: center; gap: 0.5rem;">
+                    <i class="fa-solid fa-map-location-dot" style="color: #f97316;"></i> India Thermal Heatmap
+                </h4>
             </div>
-            <p style="font-size: 0.875rem; color: var(--color-text-muted);">
-                Estimates "apparent temperature" to quantify how warm environmental moisture makes the air feel to the human body.
+            <p style="font-size: 0.875rem; color: var(--color-text-muted); line-height: 1.6;">
+                Interactive Leaflet geospatial raster showing smooth thermal gradient contours across the national boundary.
             </p>
-            <a href="{% url 'monitoring:city_search' %}" class="btn btn-secondary" style="margin-top: 0.5rem;">Search Station Metric</a>
+            <a href="{% url 'monitoring:india_heatmap' %}" class="btn btn-secondary" style="margin-top: 0.75rem; width: 100%;">
+                Open Live Map <i class="fa-solid fa-arrow-right"></i>
+            </a>
         </div>
 
         <div class="card" style="margin-bottom: 0;">
-            <div class="card-header">
-                <h4 style="margin: 0;">Forecast Outlook</h4>
+            <div class="card-header" style="margin-bottom: 1rem; padding-bottom: 0.85rem;">
+                <h4 style="margin: 0; font-size: 1.1rem; display: flex; align-items: center; gap: 0.5rem;">
+                    <i class="fa-solid fa-cloud-sun-rain" style="color: #eab308;"></i> 7-Day Forecast
+                </h4>
             </div>
-            <p style="font-size: 0.875rem; color: var(--color-text-muted);">
-                24-hour hourly and 7-day thermal outlook trends to assist community planners and outdoor workers in scheduling activities safely.
+            <p style="font-size: 0.875rem; color: var(--color-text-muted); line-height: 1.6;">
+                Comprehensive predictive timeline with peak temperature hours to help workers and communities plan activities.
             </p>
-            <a href="{% url 'monitoring:forecast' %}" class="btn btn-secondary" style="margin-top: 0.5rem;">Inspect Forecast</a>
+            <a href="{% url 'monitoring:forecast' %}" class="btn btn-secondary" style="margin-top: 0.75rem; width: 100%;">
+                Inspect Outlook <i class="fa-solid fa-arrow-right"></i>
+            </a>
         </div>
 
         <div class="card" style="margin-bottom: 0;">
-            <div class="card-header">
-                <h4 style="margin: 0;">Safety Guidance</h4>
+            <div class="card-header" style="margin-bottom: 1rem; padding-bottom: 0.85rem;">
+                <h4 style="margin: 0; font-size: 1.1rem; display: flex; align-items: center; gap: 0.5rem;">
+                    <i class="fa-solid fa-shield-heart" style="color: #ec4899;"></i> Safety Guidance
+                </h4>
             </div>
-            <p style="font-size: 0.875rem; color: var(--color-text-muted);">
-                Heat Index screening indicators (Normal, Caution, Extreme Caution, Danger, Extreme Danger) linked to hydration and shade recommendations.
+            <p style="font-size: 0.875rem; color: var(--color-text-muted); line-height: 1.6;">
+                Heat index screening tiers mapped to hydration schedules, rest intervals, and vulnerable demographic guidelines across Normal, Caution, Extreme Caution, Danger, and Extreme Danger.
             </p>
             <a href="{% url 'monitoring:safety_guidance' %}" class="btn btn-secondary" style="margin-top: 0.5rem;">View Safety Guidance</a>
         </div>
 
         <div class="card" style="margin-bottom: 0;">
-            <div class="card-header">
-                <h4 style="margin: 0;">Official Notices</h4>
+            <div class="card-header" style="margin-bottom: 1rem; padding-bottom: 0.85rem;">
+                <h4 style="margin: 0; font-size: 1.1rem; display: flex; align-items: center; gap: 0.5rem;">
+                    <i class="fa-solid fa-bullhorn" style="color: #ef4444;"></i> Official Bulletins
+                </h4>
             </div>
-            <p style="font-size: 0.875rem; color: var(--color-text-muted);">
-                Transparent bulletin feed for authorized civil protection agencies and public meteorological agencies.
+            <p style="font-size: 0.875rem; color: var(--color-text-muted); line-height: 1.6;">
+                Transparent statutory bulletin feed published by meteorological departments and civil protection authorities.
             </p>
-            <a href="{% url 'monitoring:notice_list' %}" class="btn btn-secondary" style="margin-top: 0.5rem;">Browse Bulletins</a>
+            <a href="{% url 'monitoring:notice_list' %}" class="btn btn-secondary" style="margin-top: 0.75rem; width: 100%;">
+                Read Advisories <i class="fa-solid fa-arrow-right"></i>
+            </a>
         </div>
 
-        <div class="card" style="margin-bottom: 0; background-color: #f8fafc;">
-            <div class="card-header">
-                <h4 style="margin: 0;">Account Features</h4>
+        <div class="card" style="margin-bottom: 0;">
+            <div class="card-header" style="margin-bottom: 1rem; padding-bottom: 0.85rem;">
+                <h4 style="margin: 0; font-size: 1.1rem; display: flex; align-items: center; gap: 0.5rem;">
+                    <i class="fa-solid fa-scale-balanced" style="color: #6366f1;"></i> Station Comparison
+                </h4>
             </div>
-            <p style="font-size: 0.875rem; color: var(--color-text-muted);">
-                Registered users can bookmark favorite stations and review their own recent telemetry queries.
+            <p style="font-size: 0.875rem; color: var(--color-text-muted); line-height: 1.6;">
+                Simultaneously compare temperature, humidity, and thermal risk across up to 3 monitoring stations side-by-side.
             </p>
-            <a href="{% url 'monitoring:register' %}" class="btn btn-primary" style="margin-top: 0.5rem;">Register Free</a>
+            <a href="{% url 'monitoring:city_comparison' %}" class="btn btn-secondary" style="margin-top: 0.75rem; width: 100%;">
+                Compare Cities <i class="fa-solid fa-arrow-right"></i>
+            </a>
         </div>
     </div>
-</section>
-
-<!-- How It Works Section -->
-<section class="card" aria-labelledby="workflow-title">
-    <div class="card-header">
-        <h3 id="workflow-title">How It Works: From Telemetry to Public Guidance</h3>
-    </div>
-    <div class="grid-4">
-        <div class="step-card">
-            <span class="step-number">1</span>
-            <h4>Weather Telemetry</h4>
-            <p>Current conditions and forecast values come from Open-Meteo. A reading is added to history only when a visitor explicitly saves the provider observation.</p>
-        </div>
-        <div class="step-card">
-            <span class="step-number">2</span>
-            <h4>Heat Index Model</h4>
-            <p>The application uses the preliminary Steadman calculation and, when its screening threshold is met, the Rothfusz regression to estimate apparent temperature.</p>
-        </div>
-        <div class="step-card">
-            <span class="step-number">3</span>
-            <h4>Risk Classification</h4>
-            <p>The Heat Index estimate is mapped to the screening tiers Normal, Caution, Extreme Caution, Danger, and Extreme Danger.</p>
-        </div>
-        <div class="step-card">
-            <span class="step-number">4</span>
-            <h4>Early Preparedness</h4>
-            <p>Users and community operators review actionable precautions, hydration guidelines, and published alerts.</p>
-        </div>
-    </div>
-    {% if user.is_authenticated %}
-        <p style="margin-top:1rem;">You can add a clearly labeled, unverified community observation.</p>
-        <a href="{% url 'monitoring:manual_observation' %}" class="btn btn-secondary">Report an Observation</a>
-    {% endif %}
 </section>
 
 <!-- Methodology & Limitations Disclaimer -->
 <section class="card" id="methodology" aria-labelledby="methodology-title">
     <div class="card-header">
-        <h3 id="methodology-title">Methodology, Scientific Scope & Limitations</h3>
-        <span class="tag-provenance">educational</span>
+        <h3 id="methodology-title"><i class="fa-solid fa-book-bookmark" style="color: #f97316; margin-right: 0.4rem;"></i> Methodology, Scientific Scope & Limitations</h3>
+        <span class="tag-provenance">educational standard</span>
     </div>
-    <div style="font-size: 0.9rem; color: var(--color-text-main);">
+    <div style="font-size: 0.9rem; color: var(--color-text-main); line-height: 1.7;">
         <p>
             <strong>Heat Index vs. Wet Bulb Globe Temperature (WBGT):</strong>
             HeatGuard calculates the National Oceanic and Atmospheric Administration (NOAA) Heat Index, an apparent temperature metric based on air temperature and relative humidity measured in shaded conditions with light air movement. The Heat Index is <em>not</em> Wet Bulb Globe Temperature (WBGT), which directly integrates solar radiation, angle of the sun, and wind speed.
         </p>
-        <p>
-            <strong>Applicability Bounds:</strong>
-            HeatGuard calculates a preliminary Steadman estimate and averages it with ambient air temperature. When that average reaches about 80 °F (26.7 °C), the application uses the Rothfusz regression and applicable humidity adjustment; below that threshold it uses the preliminary average. This shade-oriented estimate is not WBGT and does not include direct solar exposure. See the <a href="https://www.wpc.ncep.noaa.gov/html/heatindex_equation.shtml" target="_blank" rel="noopener noreferrer">National Weather Service method</a>.
-        </p>
-        <div class="alert alert-warning" style="margin-bottom: 0;">
-            <strong>Important Legal & Medical Disclaimer:</strong>
-            HeatGuard is an educational classroom project. Calculated estimates and visual risk levels do <strong>not</strong> constitute medical diagnoses, clinical determinations of personal heat vulnerability, or official government disaster declarations. Always heed directions from local emergency services and public health authorities.
+        <div class="alert alert-warning" style="margin-bottom: 1rem;">
+            <div class="alert-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+            <div class="alert-body">
+                <strong>Important Legal & Medical Disclaimer:</strong>
+                HeatGuard is an educational prototype. Calculated estimates and visual risk levels do <strong>not</strong> constitute medical diagnoses, clinical determinations of personal heat vulnerability, or official government disaster declarations.
+            </div>
+        </div>
+        <div style="margin-top: 1.25rem; padding-top: 1rem; border-top: 1px solid var(--color-border);">
+            <h4 style="margin: 0 0 0.5rem; font-size: 1.05rem; color: #ffffff;">Data Sources & Attribution</h4>
+            <p style="font-size: 0.85rem; color: var(--color-text-muted); margin: 0;">
+                Meteorological telemetry is powered by the Open-Meteo API under Creative Commons Attribution 4.0 International (CC BY 4.0). Official advisories are published with explicit authority attribution and source verification links.
+            </p>
         </div>
     </div>
-</section>
-
-<!-- Data Sources & Attribution -->
-<section class="card" id="data-sources" aria-labelledby="sources-title">
-    <div class="card-header">
-        <h3 id="sources-title">Data Sources & Attribution</h3>
-    </div>
-    <ul style="margin: 0; padding-left: 1.25rem; font-size: 0.9rem; color: var(--color-text-muted);">
-        <li style="margin-bottom: 0.5rem;">
-            <strong>Numerical Weather Integration:</strong> <a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer" style="color: #0f172a; font-weight: 500;">Open-Meteo Weather API</a> (under CC BY 4.0 license, queried via Python standard-library <code>urllib</code>).
-        </li>
-        <li style="margin-bottom: 0.5rem;">
-            <strong>Thermal Index Formulations:</strong> United States National Weather Service (NWS) / NOAA Technical Report SR 90-23 (Rothfusz, 1990).
-        </li>
-        <li>
-            <strong>Data Provenance Tracking:</strong> Every record in HeatGuard is strictly categorized into <code>provider-supplied</code>, <code>user-entered</code>, <code>application-calculated</code>, <code>officially published</code>, or <code>test-only</code>.
-        </li>
-    </ul>
 </section>
 {% endblock %}
