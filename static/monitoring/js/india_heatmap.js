@@ -7,23 +7,28 @@
     maxZoom: 12
   });
 
-  // High-availability CARTO Voyager raster tile layer (reliable, public, no 403 blocks)
-  const basemap = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-    maxZoom: 19,
-    subdomains: ['a', 'b', 'c', 'd'],
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+  // High-availability Esri World Topographic raster tile layer (public, free, zero API key required, no 403 blocks)
+  const basemap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
+    maxZoom: 18,
+    attribution: 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ, TomTom, Intermap, USGS, METI'
   }).addTo(map);
 
+  let tileErrorCount = 0;
   let tileErrorShown = false;
   basemap.on('tileerror', () => {
-    if (!tileErrorShown) {
+    tileErrorCount++;
+    if (tileErrorCount > 4 && !tileErrorShown) {
       tileErrorShown = true;
       const note = document.createElement('div');
       note.className = 'alert alert-warning';
       note.setAttribute('role', 'status');
       note.textContent = 'Map background tiles are temporarily unavailable. The India outline and thermal overlay remain visible.';
-      document.querySelector('.map-shell').appendChild(note);
+      const shell = document.querySelector('.map-shell');
+      if (shell) shell.appendChild(note);
     }
+  });
+  basemap.on('tileload', () => {
+    tileErrorCount = Math.max(0, tileErrorCount - 1);
   });
 
   // Color gradient for temperature: cool blue through warm orange and red.
