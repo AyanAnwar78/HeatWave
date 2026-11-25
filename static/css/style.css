@@ -132,7 +132,7 @@ body {
 }
 
 /* ==============================================================================
-   Header & Navigation (Sleek Dark Slate Header with Orange & Green Accents)
+   Header & Navigation (Sleek Single-Line Dark Slate Header)
    ============================================================================== */
 header.app-header {
     position: sticky;
@@ -144,29 +144,30 @@ header.app-header {
 }
 
 .header-container {
-    max-width: 1320px;
-    margin: 0 auto;
-    padding: 0.9rem 1.75rem;
+    width: 100%;
+    max-width: 100%;
+    padding: 0.65rem 1.75rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 1.25rem;
-    flex-wrap: wrap;
+    gap: 1rem;
+    flex-wrap: nowrap; /* Single line */
 }
 
 .brand-container {
     display: flex;
     align-items: center;
-    gap: 0.85rem;
+    gap: 0.75rem;
+    flex-shrink: 0;
 }
 
 .brand-title {
     display: flex;
     align-items: center;
-    gap: 0.65rem;
+    gap: 0.55rem;
     text-decoration: none;
     font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 1.6rem;
+    font-size: 1.45rem;
     font-weight: 800;
     letter-spacing: -0.03em;
 }
@@ -175,13 +176,13 @@ header.app-header {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
+    width: 36px;
+    height: 36px;
     border-radius: var(--radius-sm);
     background: var(--primary-gradient);
     color: #ffffff;
     box-shadow: var(--shadow-glow-orange);
-    font-size: 1.15rem;
+    font-size: 1.05rem;
 }
 
 .brand-gradient {
@@ -193,14 +194,15 @@ header.app-header {
     background: rgba(16, 185, 129, 0.2);
     border: 1px solid rgba(16, 185, 129, 0.45);
     color: #34d399;
-    font-size: 0.72rem;
+    font-size: 0.68rem;
     font-weight: 700;
-    padding: 0.25rem 0.65rem;
+    padding: 0.2rem 0.55rem;
     border-radius: 9999px;
     letter-spacing: 0.05em;
     display: flex;
     align-items: center;
     gap: 0.35rem;
+    white-space: nowrap;
     animation: floatBadge 3s ease-in-out infinite;
 }
 
@@ -208,9 +210,11 @@ header.app-header {
 .app-nav {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 1.5rem;
+    justify-content: flex-end;
+    gap: 0.85rem;
     flex-grow: 1;
+    flex-wrap: nowrap;
+    min-width: 0;
 }
 
 .nav-links {
@@ -219,25 +223,26 @@ header.app-header {
     padding: 0;
     display: flex;
     align-items: center;
-    gap: 0.4rem;
-    flex-wrap: wrap;
+    gap: 0.25rem;
+    flex-wrap: nowrap; /* Keep on a single line */
 }
 
 .nav-link {
     color: #cbd5e1;
     text-decoration: none;
-    font-size: 0.95rem;
+    font-size: 0.86rem;
     font-weight: 600;
-    padding: 0.55rem 0.85rem;
+    padding: 0.45rem 0.65rem;
     border-radius: var(--radius-sm);
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    gap: 0.45rem;
+    gap: 0.35rem;
+    white-space: nowrap;
     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .nav-link i {
-    font-size: 0.9rem;
+    font-size: 0.82rem;
     color: #94a3b8;
     transition: color 0.2s;
 }
@@ -256,7 +261,7 @@ header.app-header {
     color: #ffffff;
     background: rgba(249, 115, 22, 0.2);
     border: 1px solid rgba(249, 115, 22, 0.4);
-    box-shadow: 0 0 12px rgba(249, 115, 22, 0.25);
+    box-shadow: 0 0 10px rgba(249, 115, 22, 0.25);
 }
 
 .nav-link.active i {
@@ -273,7 +278,7 @@ header.app-header {
 .nav-actions {
     display: flex;
     align-items: center;
-    gap: 0.85rem;
+    gap: 0.65rem;
     flex-shrink: 0;
 }
 
@@ -289,9 +294,9 @@ header.app-header {
 .unit-btn {
     color: #cbd5e1;
     text-decoration: none;
-    font-size: 0.82rem;
+    font-size: 0.78rem;
     font-weight: 700;
-    padding: 0.3rem 0.75rem;
+    padding: 0.25rem 0.6rem;
     border-radius: 9999px;
     transition: all 0.2s;
 }
@@ -305,21 +310,21 @@ header.app-header {
 .auth-btn-group {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.45rem;
 }
 
 .btn-ghost-sm {
     color: #f8fafc;
     text-decoration: none;
-    font-size: 0.88rem;
+    font-size: 0.82rem;
     font-weight: 600;
-    padding: 0.45rem 0.85rem;
+    padding: 0.4rem 0.75rem;
     border-radius: var(--radius-sm);
     border: 1px solid rgba(255, 255, 255, 0.25);
     background: rgba(255, 255, 255, 0.05);
     display: inline-flex;
     align-items: center;
-    gap: 0.4rem;
+    gap: 0.35rem;
     transition: all 0.2s;
 }
 
@@ -332,14 +337,14 @@ header.app-header {
     background: var(--primary-gradient);
     color: #ffffff;
     text-decoration: none;
-    font-size: 0.88rem;
+    font-size: 0.82rem;
     font-weight: 700;
-    padding: 0.45rem 0.95rem;
+    padding: 0.4rem 0.85rem;
     border-radius: var(--radius-sm);
     box-shadow: var(--shadow-glow-orange);
     display: inline-flex;
     align-items: center;
-    gap: 0.4rem;
+    gap: 0.35rem;
     transition: all 0.2s;
 }
 
@@ -351,15 +356,16 @@ header.app-header {
 .user-pill {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.45rem;
     background: rgba(16, 185, 129, 0.2);
     border: 1px solid rgba(16, 185, 129, 0.4);
     color: #ffffff;
     text-decoration: none;
-    padding: 0.45rem 0.95rem;
+    padding: 0.35rem 0.8rem;
     border-radius: 9999px;
-    font-size: 0.88rem;
+    font-size: 0.82rem;
     font-weight: 600;
+    white-space: nowrap;
     transition: all 0.2s;
 }
 
@@ -913,6 +919,29 @@ footer.app-footer {
 }
 
 /* Responsive */
+@media (max-width: 1280px) {
+    .brand-badge {
+        display: none; /* Give more space for all nav links on standard 1366x768 laptop screens */
+    }
+    .nav-link {
+        font-size: 0.82rem;
+        padding: 0.4rem 0.55rem;
+    }
+}
+
+@media (max-width: 1024px) {
+    .header-container {
+        padding: 0.55rem 1rem;
+    }
+    .nav-links {
+        overflow-x: auto;
+        scrollbar-width: none;
+    }
+    .nav-links::-webkit-scrollbar {
+        display: none;
+    }
+}
+
 @media (max-width: 768px) {
     .header-container {
         flex-direction: column;
@@ -923,11 +952,13 @@ footer.app-footer {
         align-items: stretch;
     }
     .nav-links {
-        justify-content: center;
+        justify-content: flex-start;
+        overflow-x: auto;
+        padding-bottom: 0.35rem;
     }
     .nav-actions {
         justify-content: center;
-        margin-top: 0.75rem;
+        margin-top: 0.5rem;
     }
     .footer-container {
         grid-template-columns: 1fr;
