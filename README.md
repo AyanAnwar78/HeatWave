@@ -55,10 +55,17 @@ New accounts have unusable passwords until an operator sets them explicitly. For
 
    For a deployment, set `DJANGO_DEBUG=0`, provide a securely generated persistent `DJANGO_SECRET_KEY`, and set `DJANGO_ALLOWED_HOSTS` to the deployment host names. Production defaults enable SSL redirects, one year of HSTS, and secure session/CSRF cookies. Configure `DJANGO_SECURE_SSL_REDIRECT`, `DJANGO_SECURE_HSTS_SECONDS`, `DJANGO_SESSION_COOKIE_SECURE`, and `DJANGO_CSRF_COOKIE_SECURE` explicitly when your deployment topology requires different values. Settings refuse to start with debug disabled when the secret key or allowed hosts are missing. HTTPS redirects are off by default in local development.
 
-4. **Apply Database Migrations:**
+4. **Apply Database Migrations & Seed Default Data:**
    ```bash
    python manage.py migrate
+   python manage.py setup_roles
+   python manage.py seed_stations
+   python manage.py seed_notices
    ```
+
+   - `setup_roles`: Provisions the `demouser` and `staffuser` accounts and the `Weather Authority Staff` permission group.
+   - `seed_stations`: Seeds initial Indian monitoring stations (Delhi, Prayagraj, Guwahati, Mumbai, etc.). Any other city worldwide can also be searched and added dynamically via live Open-Meteo geocoding.
+   - `seed_notices`: Seeds initial active heat advisories and bulletins.
 
 5. **Verify System Checks & Run Tests:**
    ```bash
@@ -67,7 +74,14 @@ New accounts have unusable passwords until an operator sets them explicitly. For
    ```
 
 6. **Run the Development Server:**
+   PowerShell:
+   ```powershell
+   $env:DJANGO_DEBUG = "1"
+   python manage.py runserver
+   ```
+   Bash:
    ```bash
+   export DJANGO_DEBUG=1
    python manage.py runserver
    ```
    Open your browser and navigate to `http://127.0.0.1:8000/`.
