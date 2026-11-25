@@ -1,54 +1,14 @@
-# Python
 __pycache__/
 *.py[cod]
-*.pyo
-*.pyd
-*.pyc
-*.pdb
-
-# Virtual environment
-venv/
-env/
-.venv/
-.env/
-
-# Django
 *.sqlite3
-*.log
 db.sqlite3
-media/
-staticfiles/
-
-# Environment variables
+venv/
+.venv/
 .env
-.env.local
-.env.*.local
-
-# IDEs
-.vscode/
-.idea/
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
-
-# OS
-.DS_Store
-Thumbs.db
-desktop.ini
-
-# Distribution / packaging
-dist/
-build/
-*.egg-info/
-.eggs/
-
-# Coverage
-htmlcov/
-.coverage
-.coverage.*
-coverage.xml
-
-# Pytest
-.pytest_cache/
+.env.*
+!.env.example
+CODE_CHANGES_LOCAL.md
+staticfiles/
+media/
+scratch/
+*.log
