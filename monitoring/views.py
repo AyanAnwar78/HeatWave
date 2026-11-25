@@ -1,3 +1,4 @@
+import json
 import logging
 import time
 from decimal import Decimal
@@ -107,7 +108,13 @@ def home_view(request):
 
 @require_GET
 def india_heatmap_view(request):
-    return render(request, 'monitoring/india_heatmap.html')
+    stations = list(
+        Location.objects.filter(country__iexact='India')
+        .values('id', 'name', 'latitude', 'longitude', 'state_or_region')[:30]
+    )
+    return render(request, 'monitoring/india_heatmap.html', {
+        'stations_json': json.dumps(stations, default=str),
+    })
 
 
 @require_GET

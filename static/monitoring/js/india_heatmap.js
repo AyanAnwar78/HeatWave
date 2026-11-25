@@ -43,21 +43,26 @@
 
   // Color gradient for Heat Index
   const hiGradient = {
-    0.0: '#38bdf8',
-    0.2: '#a3e635',
-    0.4: '#facc15',
-    0.65: '#fb923c',
-    0.82: '#ef4444',
-    1.0: '#7f1d1d'
+    0.0: '#38bdf8',  // Cool cyan/blue (< 65°F)
+    0.25: '#22c55e', // Normal green (65 - 80°F)
+    0.45: '#eab308', // Caution yellow (80 - 90°F)
+    0.65: '#f97316', // Extreme caution orange (90 - 103°F)
+    0.82: '#ef4444', // Danger red (103 - 124°F)
+    1.0: '#7f1d1d'   // Extreme danger maroon (>= 125°F)
   };
 
+  // Heat layer with strong opacity and radius to ensure continuous color coverage across India
   const heat = L.heatLayer([], {
-    radius: 52,
-    blur: 38,
+    radius: 56,
+    blur: 34,
     maxZoom: 8,
     max: 1.0,
+    minOpacity: 0.42,
     gradient: tempGradient
   }).addTo(map);
+
+  // Dedicated interactive station markers layer
+  const stationsLayer = L.layerGroup().addTo(map);
 
   let indiaBoundaryLayer = null;
   let currentMode = 'temp'; // 'temp' or 'hi'
@@ -83,10 +88,10 @@
     .then(geo => {
       indiaBoundaryLayer = L.geoJSON(geo, {
         style: {
-          color: '#1e293b',
-          weight: 1.8,
+          color: '#0f172a',
+          weight: 2,
           fill: false,
-          opacity: 0.85
+          opacity: 0.9
         }
       }).addTo(map);
       map.fitBounds(indiaBoundaryLayer.getBounds(), { padding: [15, 15] });
@@ -98,6 +103,104 @@
       }
     });
 
+  // Default major monitoring hubs across India (used if not passed via config)
+  const defaultStationHubs = [
+    { id: 2, name: 'Delhi', latitude: 28.6139, longitude: 77.2090, state_or_region: 'Delhi' },
+    { id: 3, name: 'Mumbai', latitude: 19.0760, longitude: 72.8777, state_or_region: 'Maharashtra' },
+    { id: 4, name: 'Kolkata', latitude: 22.5726, longitude: 88.3639, state_or_region: 'West Bengal' },
+    { id: 5, name: 'Chennai', latitude: 13.0827, longitude: 80.2707, state_or_region: 'Tamil Nadu' },
+    { id: 6, name: 'Bengaluru', latitude: 12.9716, longitude: 77.5946, state_or_region: 'Karnataka' },
+    { id: 7, name: 'Hyderabad', latitude: 17.3850, longitude: 78.4867, state_or_region: 'Telangana' },
+    { id: 8, name: 'Ahmedabad', latitude: 23.0225, longitude: 72.5714, state_or_region: 'Gujarat' },
+    { id: 9, name: 'Jaipur', latitude: 26.9124, longitude: 75.7873, state_or_region: 'Rajasthan' },
+    { id: 10, name: 'Lucknow', latitude: 26.8467, longitude: 80.9462, state_or_region: 'Uttar Pradesh' },
+    { id: 12, name: 'Patna', latitude: 25.5941, longitude: 85.1376, state_or_region: 'Bihar' },
+    { id: 13, name: 'Guwahati', latitude: 26.1844, longitude: 91.7458, state_or_region: 'Assam' },
+    { id: 1, name: 'Prayagraj', latitude: 25.4358, longitude: 81.8463, state_or_region: 'Uttar Pradesh' }
+  ];
+
+  function renderStationMarkers(points) {
+    stationsLayer.clearLayers();
+    const stations = (config.stations && config.stations.length > 0) ? config.stations : defaultStationHubs;
+
+    stations.forEach(st => {
+      const sLat = parseFloat(st.latitude);
+      const sLon = parseFloat(st.longitude);
+      if (isNaN(sLat) || isNaN(sLon)) return;
+
+      // Find nearest grid observation point
+      let nearest = null;
+      let minDist = Infinity;
+      for (const p of points) {
+        const distSq = (p.latitude - sLat) ** 2 + (p.longitude - sLon) ** 2;
+        if (distSq < minDist) {
+          minDist = distSq;
+          nearest = p;
+        }
+      }
+
+      if (!nearest) return;
+
+      // Color mapping according to risk / mode
+      let markerColor = '#10b981'; // Green (Normal)
+      const risk = (nearest.risk || 'NORMAL').toUpperCase();
+      if (risk === 'CAUTION') markerColor = '#f59e0b';
+      else if (risk === 'EXTREME_CAUTION') markerColor = '#f97316';
+      else if (risk === 'DANGER') markerColor = '#ef4444';
+      else if (risk === 'EXTREME_DANGER') markerColor = '#7f1d1d';
+
+      const tempVal = nearest.temperature_c !== undefined ? nearest.temperature_c.toFixed(1) + '°C' : '--';
+      const hiVal = nearest.heat_index_c !== undefined ? nearest.heat_index_c.toFixed(1) + '°C' : '--';
+      const hiValF = nearest.heat_index_f !== undefined ? nearest.heat_index_f.toFixed(1) + '°F' : '--';
+
+      const circle = L.circleMarker([sLat, sLon], {
+        radius: 7,
+        fillColor: markerColor,
+        color: '#ffffff',
+        weight: 2.5,
+        opacity: 1,
+        fillOpacity: 0.95
+      });
+
+      // Tooltip on hover
+      circle.bindTooltip(`<strong>${st.name}</strong>: ${currentMode === 'temp' ? tempVal : hiVal + ' (' + risk + ')'}`, {
+        permanent: false,
+        direction: 'top',
+        offset: [0, -6]
+      });
+
+      // Rich popup on click
+      const popupHtml = `
+        <div style="font-family: inherit; font-size: 0.92rem; padding: 4px; min-width: 175px;">
+          <div style="font-size: 1.1rem; font-weight: 800; color: #0f172a; margin-bottom: 4px;">
+            <i class="fa-solid fa-location-dot" style="color: ${markerColor};"></i> ${st.name}
+          </div>
+          <div style="color: #64748b; font-size: 0.8rem; margin-bottom: 8px;">${st.state_or_region || 'India'}</div>
+          <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+            <span style="color: #475569;">Air Temp:</span>
+            <strong style="color: #ea580c;">${tempVal}</strong>
+          </div>
+          <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+            <span style="color: #475569;">Heat Index:</span>
+            <strong style="color: #0f172a;">${hiVal} (${hiValF})</strong>
+          </div>
+          <div style="margin-top: 6px; padding: 4px 8px; background: #f8fafc; border-radius: 6px; border: 1px solid #e2e8f0; font-size: 0.78rem;">
+            Thermal Risk: <strong style="color: ${markerColor};">${risk}</strong>
+          </div>
+          ${st.id ? `
+            <div style="margin-top: 10px;">
+              <a href="/city/${st.id}/" style="display: block; text-align: center; background: #0f172a; color: #ffffff; text-decoration: none; padding: 5px 8px; border-radius: 6px; font-weight: 700; font-size: 0.8rem;">
+                View Station Telemetry &rarr;
+              </a>
+            </div>
+          ` : ''}
+        </div>
+      `;
+      circle.bindPopup(popupHtml);
+      stationsLayer.addLayer(circle);
+    });
+  }
+
   function updateLayerData() {
     if (!cachedPayload || !cachedPayload.valid_points) return;
 
@@ -105,14 +208,14 @@
     const heatData = [];
 
     if (currentMode === 'temp') {
-      // Temperature range in C: scale -5°C to 45°C
-      const minT = -5;
-      const maxT = 45;
+      // Temperature range in °C: Scale from 0°C to 48°C
+      // Ensures cooler temperatures (<18°C) still render with a visible cyan/emerald tint
+      const minT = 0;
+      const maxT = 48;
       points.forEach(p => {
-        const val = p.temperature_c;
-        const norm = Math.max(0.08, Math.min(1.0, (val - minT) / (maxT - minT)));
+        const val = p.temperature_c !== undefined ? p.temperature_c : 20;
+        const norm = Math.max(0.18, Math.min(1.0, 0.16 + ((val - minT) / (maxT - minT)) * 0.84));
         heatData.push([p.latitude, p.longitude, norm]);
-
       });
 
       heat.setOptions({ gradient: tempGradient });
@@ -133,10 +236,18 @@
         legendDesc.textContent = 'Model-based 2 m air-temperature estimates from Open-Meteo. The smooth surface is interpolated between sample locations.';
       }
     } else {
-      // Heat Index mode
+      // Heat Index mode: Scale from 50°F to 125°F
+      // Normal (<80°F) conditions render as visible cool green/cyan (~0.18 - 0.45)
+      // Caution (80-90°F) renders as yellow (~0.45 - 0.60)
+      // Extreme Caution (90-103°F) renders as orange (~0.60 - 0.78)
+      // Danger (103-124°F) renders as red (~0.78 - 0.92)
+      // Extreme Danger (>=125°F) renders as deep maroon (~0.92 - 1.0)
+      const minHI = 50;
+      const maxHI = 125;
       points.forEach(p => {
-        heatData.push([p.latitude, p.longitude, p.intensity]);
-
+        const hi_f = (p.heat_index_f !== undefined && p.heat_index_f !== null) ? p.heat_index_f : 70;
+        const norm = Math.max(0.18, Math.min(1.0, 0.16 + ((hi_f - minHI) / (maxHI - minHI)) * 0.84));
+        heatData.push([p.latitude, p.longitude, norm]);
       });
 
       heat.setOptions({ gradient: hiGradient });
@@ -156,6 +267,9 @@
         legendDesc.textContent = 'Estimated Heat Index calculated from model-based air temperature and humidity using the NOAA/NWS method.';
       }
     }
+
+    // Update interactive station markers
+    renderStationMarkers(points);
   }
 
   async function refresh(manual = false) {
