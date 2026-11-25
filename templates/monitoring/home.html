@@ -3,10 +3,10 @@
 {% block title %}HeatGuard - Understand Heat. Prepare Earlier.{% endblock %}
 
 {% block content %}
-<!-- Modern Hero Section -->
+<!-- Modern Hero Section with Soft Solar-Emerald Gradient Mesh -->
 <section class="hero-section" aria-labelledby="hero-title">
-    <div style="display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(249, 115, 22, 0.15); border: 1px solid rgba(249, 115, 22, 0.35); border-radius: 9999px; padding: 0.35rem 1rem; color: #fb923c; font-size: 0.8rem; font-weight: 700; margin-bottom: 1.25rem;">
-        <i class="fa-solid fa-fire-flame-curved"></i> Environmental Heatwave Early Warning
+    <div style="display: inline-flex; align-items: center; gap: 0.55rem; background: #fff7ed; border: 2px solid #fdba74; border-radius: 9999px; padding: 0.45rem 1.25rem; color: #c2410c; font-size: 0.95rem; font-weight: 800; margin-bottom: 1.5rem; box-shadow: var(--shadow-sm);">
+        <i class="fa-solid fa-fire-flame-curved" style="color: #ea580c;"></i> Environmental Heatwave Early Warning
     </div>
     <h1 id="hero-title" class="hero-heading">Understand Heat. Prepare Earlier.</h1>
     <p class="hero-subtext">
@@ -17,7 +17,7 @@
         <div style="flex: 1; position: relative;">
             {{ form.city }}
         </div>
-        <button type="submit" class="btn btn-accent" style="padding: 0.85rem 1.75rem; font-size: 0.95rem;">
+        <button type="submit" class="btn btn-accent" style="padding: 1rem 2rem; font-size: 1.05rem;">
             <i class="fa-solid fa-magnifying-glass-location"></i> Monitor City
         </button>
     </form>
@@ -28,36 +28,36 @@
 <section class="card" aria-labelledby="pillars-title" id="about">
     <div class="card-header">
         <div>
-            <h3 id="pillars-title"><i class="fa-solid fa-microchip" style="color: #f97316; margin-right: 0.4rem;"></i> Thermal Stress Monitoring Framework</h3>
-            <div style="font-size: 0.85rem; color: var(--color-text-muted); margin-top: 0.2rem;">Deterministic mathematical assessment without synthetic fallbacks</div>
+            <h3 id="pillars-title" style="color: #0f172a;"><i class="fa-solid fa-microchip" style="color: #ea580c; margin-right: 0.4rem;"></i> Thermal Stress Monitoring Framework</h3>
+            <div style="font-size: 0.95rem; color: #64748b; margin-top: 0.35rem;">Deterministic mathematical assessment without synthetic fallbacks</div>
         </div>
         <span class="tag-provenance">application-calculated</span>
     </div>
     <div class="grid-3">
-        <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 1.5rem;">
-            <div style="width: 42px; height: 42px; border-radius: var(--radius-sm); background: rgba(56, 189, 248, 0.12); color: #38bdf8; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; margin-bottom: 1rem;">
+        <div class="dashboard-telemetry-card" style="background: #f0fdf4; border: 2px solid #bbf7d0; border-top: 5px solid #10b981;">
+            <div style="width: 48px; height: 48px; border-radius: var(--radius-sm); background: #dcfce7; color: #059669; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; margin-bottom: 1.25rem;">
                 <i class="fa-solid fa-temperature-half"></i>
             </div>
-            <h4 style="margin: 0 0 0.5rem; color: #ffffff; font-size: 1.1rem;">Live Telemetry</h4>
-            <p style="font-size: 0.875rem; color: var(--color-text-muted); margin: 0; line-height: 1.6;">
+            <h4 style="margin: 0 0 0.5rem; color: #0f172a; font-size: 1.25rem;">Live Telemetry</h4>
+            <p style="font-size: 0.95rem; color: #334155; margin: 0; line-height: 1.65;">
                 Calculates the estimated Heat Index from ambient dry-bulb temperature and relative surface moisture using standard NOAA Rothfusz regression.
             </p>
         </div>
-        <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 1.5rem;">
-            <div style="width: 42px; height: 42px; border-radius: var(--radius-sm); background: rgba(249, 115, 22, 0.12); color: #f97316; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; margin-bottom: 1rem;">
+        <div class="dashboard-telemetry-card" style="background: #fff7ed; border: 2px solid #fed7aa; border-top: 5px solid #f97316;">
+            <div style="width: 48px; height: 48px; border-radius: var(--radius-sm); background: #ffedd5; color: #ea580c; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; margin-bottom: 1.25rem;">
                 <i class="fa-solid fa-chart-line"></i>
             </div>
-            <h4 style="margin: 0 0 0.5rem; color: #ffffff; font-size: 1.1rem;">Multi-Day Projections</h4>
-            <p style="font-size: 0.875rem; color: var(--color-text-muted); margin: 0; line-height: 1.6;">
+            <h4 style="margin: 0 0 0.5rem; color: #0f172a; font-size: 1.25rem;">Multi-Day Projections</h4>
+            <p style="font-size: 0.95rem; color: #334155; margin: 0; line-height: 1.65;">
                 Continuous 24-hour hourly curve and 7-day outlook to detect cumulative thermal stress and humidity spikes before they peak.
             </p>
         </div>
-        <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 1.5rem;">
-            <div style="width: 42px; height: 42px; border-radius: var(--radius-sm); background: rgba(239, 68, 68, 0.12); color: #f87171; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; margin-bottom: 1rem;">
+        <div class="dashboard-telemetry-card" style="background: #fef2f2; border: 2px solid #fecaca; border-top: 5px solid #ef4444;">
+            <div style="width: 48px; height: 48px; border-radius: var(--radius-sm); background: #fee2e2; color: #dc2626; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; margin-bottom: 1.25rem;">
                 <i class="fa-solid fa-shield-virus"></i>
             </div>
-            <h4 style="margin: 0 0 0.5rem; color: #ffffff; font-size: 1.1rem;">Official Bulletins</h4>
-            <p style="font-size: 0.875rem; color: var(--color-text-muted); margin: 0; line-height: 1.6;">
+            <h4 style="margin: 0 0 0.5rem; color: #0f172a; font-size: 1.25rem;">Official Bulletins</h4>
+            <p style="font-size: 0.95rem; color: #334155; margin: 0; line-height: 1.65;">
                 Verified statutory advisories, watches, and heat emergency alerts published with issuing organization attribution and validity windows.
             </p>
         </div>
@@ -65,91 +65,91 @@
 </section>
 
 <!-- Feature Navigation Grid -->
-<section style="margin-bottom: 2.5rem;" aria-labelledby="features-title">
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
-        <h3 id="features-title" style="margin: 0; color: #ffffff; font-size: 1.35rem; font-weight: 800;">
-            <i class="fa-solid fa-cubes-stacked" style="color: #f97316; margin-right: 0.4rem;"></i> Integrated Capabilities
+<section style="margin-bottom: 2.75rem;" aria-labelledby="features-title">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+        <h3 id="features-title" style="margin: 0; color: #0f172a; font-size: 1.6rem; font-weight: 800;">
+            <i class="fa-solid fa-cubes-stacked" style="color: #ea580c; margin-right: 0.4rem;"></i> Integrated Capabilities
         </h3>
     </div>
     <div class="grid-3">
         <div class="card" style="margin-bottom: 0;">
-            <div class="card-header" style="margin-bottom: 1rem; padding-bottom: 0.85rem;">
-                <h4 style="margin: 0; font-size: 1.1rem; display: flex; align-items: center; gap: 0.5rem;">
-                    <i class="fa-solid fa-tower-broadcast" style="color: #38bdf8;"></i> Station Monitor
+            <div class="card-header" style="margin-bottom: 1.25rem; padding-bottom: 1rem;">
+                <h4 style="margin: 0; font-size: 1.25rem; color: #0f172a; display: flex; align-items: center; gap: 0.5rem;">
+                    <i class="fa-solid fa-tower-broadcast" style="color: #0284c7;"></i> Station Monitor
                 </h4>
             </div>
-            <p style="font-size: 0.875rem; color: var(--color-text-muted); line-height: 1.6;">
+            <p style="font-size: 0.95rem; color: #475569; line-height: 1.65;">
                 Localized ground telemetry tracking hourly moisture shifts, temperature records, and personal bookmarks.
             </p>
-            <a href="{% url 'monitoring:city_search' %}" class="btn btn-secondary" style="margin-top: 0.75rem; width: 100%;">
+            <a href="{% url 'monitoring:city_search' %}" class="btn btn-secondary" style="margin-top: 1rem; width: 100%;">
                 Access Stations <i class="fa-solid fa-arrow-right"></i>
             </a>
         </div>
 
         <div class="card" style="margin-bottom: 0;">
-            <div class="card-header" style="margin-bottom: 1rem; padding-bottom: 0.85rem;">
-                <h4 style="margin: 0; font-size: 1.1rem; display: flex; align-items: center; gap: 0.5rem;">
-                    <i class="fa-solid fa-map-location-dot" style="color: #f97316;"></i> India Thermal Heatmap
+            <div class="card-header" style="margin-bottom: 1.25rem; padding-bottom: 1rem;">
+                <h4 style="margin: 0; font-size: 1.25rem; color: #0f172a; display: flex; align-items: center; gap: 0.5rem;">
+                    <i class="fa-solid fa-map-location-dot" style="color: #10b981;"></i> India Thermal Heatmap
                 </h4>
             </div>
-            <p style="font-size: 0.875rem; color: var(--color-text-muted); line-height: 1.6;">
+            <p style="font-size: 0.95rem; color: #475569; line-height: 1.65;">
                 Interactive Leaflet geospatial raster showing smooth thermal gradient contours across the national boundary.
             </p>
-            <a href="{% url 'monitoring:india_heatmap' %}" class="btn btn-secondary" style="margin-top: 0.75rem; width: 100%;">
+            <a href="{% url 'monitoring:india_heatmap' %}" class="btn btn-secondary" style="margin-top: 1rem; width: 100%;">
                 Open Live Map <i class="fa-solid fa-arrow-right"></i>
             </a>
         </div>
 
         <div class="card" style="margin-bottom: 0;">
-            <div class="card-header" style="margin-bottom: 1rem; padding-bottom: 0.85rem;">
-                <h4 style="margin: 0; font-size: 1.1rem; display: flex; align-items: center; gap: 0.5rem;">
-                    <i class="fa-solid fa-cloud-sun-rain" style="color: #eab308;"></i> 7-Day Forecast
+            <div class="card-header" style="margin-bottom: 1.25rem; padding-bottom: 1rem;">
+                <h4 style="margin: 0; font-size: 1.25rem; color: #0f172a; display: flex; align-items: center; gap: 0.5rem;">
+                    <i class="fa-solid fa-cloud-sun-rain" style="color: #ea580c;"></i> 7-Day Forecast
                 </h4>
             </div>
-            <p style="font-size: 0.875rem; color: var(--color-text-muted); line-height: 1.6;">
+            <p style="font-size: 0.95rem; color: #475569; line-height: 1.65;">
                 Comprehensive predictive timeline with peak temperature hours to help workers and communities plan activities.
             </p>
-            <a href="{% url 'monitoring:forecast' %}" class="btn btn-secondary" style="margin-top: 0.75rem; width: 100%;">
+            <a href="{% url 'monitoring:forecast' %}" class="btn btn-secondary" style="margin-top: 1rem; width: 100%;">
                 Inspect Outlook <i class="fa-solid fa-arrow-right"></i>
             </a>
         </div>
 
         <div class="card" style="margin-bottom: 0;">
-            <div class="card-header" style="margin-bottom: 1rem; padding-bottom: 0.85rem;">
-                <h4 style="margin: 0; font-size: 1.1rem; display: flex; align-items: center; gap: 0.5rem;">
-                    <i class="fa-solid fa-shield-heart" style="color: #ec4899;"></i> Safety Guidance
+            <div class="card-header" style="margin-bottom: 1.25rem; padding-bottom: 1rem;">
+                <h4 style="margin: 0; font-size: 1.25rem; color: #0f172a; display: flex; align-items: center; gap: 0.5rem;">
+                    <i class="fa-solid fa-shield-heart" style="color: #059669;"></i> Safety Guidance
                 </h4>
             </div>
-            <p style="font-size: 0.875rem; color: var(--color-text-muted); line-height: 1.6;">
+            <p style="font-size: 0.95rem; color: #475569; line-height: 1.65;">
                 Heat index screening tiers mapped to hydration schedules, rest intervals, and vulnerable demographic guidelines across Normal, Caution, Extreme Caution, Danger, and Extreme Danger.
             </p>
             <a href="{% url 'monitoring:safety_guidance' %}" class="btn btn-secondary" style="margin-top: 0.5rem;">View Safety Guidance</a>
         </div>
 
         <div class="card" style="margin-bottom: 0;">
-            <div class="card-header" style="margin-bottom: 1rem; padding-bottom: 0.85rem;">
-                <h4 style="margin: 0; font-size: 1.1rem; display: flex; align-items: center; gap: 0.5rem;">
-                    <i class="fa-solid fa-bullhorn" style="color: #ef4444;"></i> Official Bulletins
+            <div class="card-header" style="margin-bottom: 1.25rem; padding-bottom: 1rem;">
+                <h4 style="margin: 0; font-size: 1.25rem; color: #0f172a; display: flex; align-items: center; gap: 0.5rem;">
+                    <i class="fa-solid fa-bullhorn" style="color: #dc2626;"></i> Official Bulletins
                 </h4>
             </div>
-            <p style="font-size: 0.875rem; color: var(--color-text-muted); line-height: 1.6;">
+            <p style="font-size: 0.95rem; color: #475569; line-height: 1.65;">
                 Transparent statutory bulletin feed published by meteorological departments and civil protection authorities.
             </p>
-            <a href="{% url 'monitoring:notice_list' %}" class="btn btn-secondary" style="margin-top: 0.75rem; width: 100%;">
+            <a href="{% url 'monitoring:notice_list' %}" class="btn btn-secondary" style="margin-top: 1rem; width: 100%;">
                 Read Advisories <i class="fa-solid fa-arrow-right"></i>
             </a>
         </div>
 
         <div class="card" style="margin-bottom: 0;">
-            <div class="card-header" style="margin-bottom: 1rem; padding-bottom: 0.85rem;">
-                <h4 style="margin: 0; font-size: 1.1rem; display: flex; align-items: center; gap: 0.5rem;">
-                    <i class="fa-solid fa-scale-balanced" style="color: #6366f1;"></i> Station Comparison
+            <div class="card-header" style="margin-bottom: 1.25rem; padding-bottom: 1rem;">
+                <h4 style="margin: 0; font-size: 1.25rem; color: #0f172a; display: flex; align-items: center; gap: 0.5rem;">
+                    <i class="fa-solid fa-scale-balanced" style="color: #4f46e5;"></i> Station Comparison
                 </h4>
             </div>
-            <p style="font-size: 0.875rem; color: var(--color-text-muted); line-height: 1.6;">
+            <p style="font-size: 0.95rem; color: #475569; line-height: 1.65;">
                 Simultaneously compare temperature, humidity, and thermal risk across up to 3 monitoring stations side-by-side.
             </p>
-            <a href="{% url 'monitoring:city_comparison' %}" class="btn btn-secondary" style="margin-top: 0.75rem; width: 100%;">
+            <a href="{% url 'monitoring:city_comparison' %}" class="btn btn-secondary" style="margin-top: 1rem; width: 100%;">
                 Compare Cities <i class="fa-solid fa-arrow-right"></i>
             </a>
         </div>
@@ -159,24 +159,24 @@
 <!-- Methodology & Limitations Disclaimer -->
 <section class="card" id="methodology" aria-labelledby="methodology-title">
     <div class="card-header">
-        <h3 id="methodology-title"><i class="fa-solid fa-book-bookmark" style="color: #f97316; margin-right: 0.4rem;"></i> Methodology, Scientific Scope & Limitations</h3>
+        <h3 id="methodology-title" style="color: #0f172a;"><i class="fa-solid fa-book-bookmark" style="color: #ea580c; margin-right: 0.4rem;"></i> Methodology, Scientific Scope & Limitations</h3>
         <span class="tag-provenance">educational standard</span>
     </div>
-    <div style="font-size: 0.9rem; color: var(--color-text-main); line-height: 1.7;">
+    <div style="font-size: 0.98rem; color: #1e293b; line-height: 1.75;">
         <p>
             <strong>Heat Index vs. Wet Bulb Globe Temperature (WBGT):</strong>
             HeatGuard calculates the National Oceanic and Atmospheric Administration (NOAA) Heat Index, an apparent temperature metric based on air temperature and relative humidity measured in shaded conditions with light air movement. The Heat Index is <em>not</em> Wet Bulb Globe Temperature (WBGT), which directly integrates solar radiation, angle of the sun, and wind speed.
         </p>
-        <div class="alert alert-warning" style="margin-bottom: 1rem;">
+        <div class="alert alert-warning" style="margin-bottom: 1.25rem;">
             <div class="alert-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
             <div class="alert-body">
                 <strong>Important Legal & Medical Disclaimer:</strong>
                 HeatGuard is an educational prototype. Calculated estimates and visual risk levels do <strong>not</strong> constitute medical diagnoses, clinical determinations of personal heat vulnerability, or official government disaster declarations.
             </div>
         </div>
-        <div style="margin-top: 1.25rem; padding-top: 1rem; border-top: 1px solid var(--color-border);">
-            <h4 style="margin: 0 0 0.5rem; font-size: 1.05rem; color: #ffffff;">Data Sources & Attribution</h4>
-            <p style="font-size: 0.85rem; color: var(--color-text-muted); margin: 0;">
+        <div style="margin-top: 1.5rem; padding-top: 1.25rem; border-top: 1px solid #e2e8f0;">
+            <h4 style="margin: 0 0 0.5rem; font-size: 1.15rem; color: #0f172a;">Data Sources & Attribution</h4>
+            <p style="font-size: 0.95rem; color: #475569; margin: 0;">
                 Meteorological telemetry is powered by the Open-Meteo API under Creative Commons Attribution 4.0 International (CC BY 4.0). Official advisories are published with explicit authority attribution and source verification links.
             </p>
         </div>

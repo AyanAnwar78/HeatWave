@@ -7,25 +7,25 @@
 <div class="card">
     <div class="card-header">
         <div>
-            <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
-                <h2 style="margin: 0; font-size: 1.85rem; font-weight: 800; color: #ffffff;">
+            <div style="display: flex; align-items: center; gap: 0.85rem; flex-wrap: wrap;">
+                <h2 style="margin: 0; font-size: 2.2rem; font-weight: 800; color: #0f172a;">
                     Regional Heatwave Forecast
                 </h2>
                 <span class="tag-provenance"><i class="fa-solid fa-cloud-bolt"></i> provider-supplied</span>
             </div>
-            <div style="font-size: 0.9rem; color: var(--color-text-muted); margin-top: 0.35rem;">
+            <div style="font-size: 1rem; color: #475569; margin-top: 0.45rem;">
                 Forecast-based heat-risk outlook &bull; Numerical simulation projections
             </div>
         </div>
     </div>
 
     <!-- Station Selection Form -->
-    <div style="background: rgba(15, 23, 42, 0.6); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 1.25rem; margin-bottom: 1.75rem;">
-        <form method="get" action="{% url 'monitoring:forecast' %}" style="display: flex; gap: 0.85rem; align-items: center; flex-wrap: wrap;">
-            <label for="station-select" style="font-weight: 700; font-size: 0.9rem; color: #ffffff;">
-                <i class="fa-solid fa-tower-broadcast" style="color: #f97316; margin-right: 0.35rem;"></i> Select Monitoring Station:
+    <div style="background: linear-gradient(135deg, #f0fdf4 0%, #fff7ed 100%); border: 2px solid #fed7aa; border-radius: var(--radius-md); padding: 1.5rem; margin-bottom: 2rem;">
+        <form method="get" action="{% url 'monitoring:forecast' %}" style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
+            <label for="station-select" style="font-weight: 800; font-size: 1rem; color: #0f172a;">
+                <i class="fa-solid fa-tower-broadcast" style="color: #ea580c; margin-right: 0.45rem;"></i> Select Monitoring Station:
             </label>
-            <select id="station-select" name="location_id" class="form-select" style="max-width: 340px; background: rgba(15, 23, 42, 0.95); color: #ffffff; border-color: rgba(255,255,255,0.15);" onchange="this.form.submit()">
+            <select id="station-select" name="location_id" class="form-select" style="max-width: 360px;" onchange="this.form.submit()">
                 {% for station in all_stations %}
                     <option value="{{ station.id }}" {% if location.id == station.id %}selected{% endif %}>
                         {{ station.name }} ({{ station.country }})
@@ -41,15 +41,15 @@
     </div>
 
     <!-- Section Heading & Scientific Distinction Note -->
-    <div style="margin-bottom: 1.75rem; border-bottom: 1px solid var(--color-border); padding-bottom: 1rem;">
-        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.75rem;">
-            <h3 style="margin: 0; font-size: 1.25rem; font-weight: 700; color: #ffffff; display: flex; align-items: center; gap: 0.5rem;">
-                <i class="fa-solid fa-chart-line" style="color: #38bdf8;"></i> Forecast-Based Heat-Risk Outlook
+    <div style="margin-bottom: 2rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 1.25rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 1rem;">
+            <h3 style="margin: 0; font-size: 1.45rem; font-weight: 800; color: #0f172a; display: flex; align-items: center; gap: 0.5rem;">
+                <i class="fa-solid fa-chart-line" style="color: #0284c7;"></i> Forecast-Based Heat-Risk Outlook
             </h3>
-            <span class="badge risk-moderate" style="font-size: 0.8rem;">Model Outlook Only</span>
+            <span class="badge risk-moderate" style="font-size: 0.88rem;">Model Outlook Only</span>
         </div>
-        <div class="alert alert-warning" style="margin: 0; font-size: 0.85rem;">
-            <i class="fa-solid fa-triangle-exclamation alert-icon" style="color: #facc15;"></i>
+        <div class="alert alert-warning" style="margin: 0; font-size: 0.95rem;">
+            <i class="fa-solid fa-triangle-exclamation alert-icon" style="color: #b45309;"></i>
             <div class="alert-body">
                 <strong>Important Legal & Methodological Disclaimer:</strong>
                 This generated outlook is a mathematical estimate derived from numerical weather forecast models.
@@ -61,16 +61,16 @@
 
     {% if forecast_error %}
         <div class="ui-state-box error-state">
-            <i class="fa-solid fa-cloud-showers-heavy" style="font-size: 2.5rem; color: #ef4444; margin-bottom: 0.75rem;"></i>
-            <h3>Forecast Data Unavailable</h3>
-            <p>{{ forecast_error }}</p>
-            <p style="font-size: 0.825rem; color: var(--color-text-muted);">
+            <i class="fa-solid fa-cloud-showers-heavy" style="font-size: 3rem; color: #dc2626; margin-bottom: 0.85rem;"></i>
+            <h3 style="color: #991b1b;">Forecast Data Unavailable</h3>
+            <p style="color: #7f1d1d;">{{ forecast_error }}</p>
+            <p style="font-size: 0.9rem; color: #64748b;">
                 HeatGuard does not generate synthetic forecasts or fabricated trends.
             </p>
         </div>
     {% elif forecast_data %}
         <!-- Location, Issue Time, Timezone & Attribution Metadata -->
-        <div style="background: rgba(15, 23, 42, 0.5); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 1rem 1.25rem; font-size: 0.825rem; color: var(--color-text-muted); margin-bottom: 1.75rem;">
+        <div style="background: #f8fafc; border: 1px solid #cbd5e1; border-radius: var(--radius-md); padding: 1.25rem 1.5rem; font-size: 0.88rem; color: #475569; margin-bottom: 2rem; line-height: 1.7;">
             <div class="grid-2">
                 <div>
                     <div><strong>Station:</strong> {{ location.name }} ({{ location.latitude }}°, {{ location.longitude }}°)</div>
@@ -86,102 +86,102 @@
         </div>
 
         <!-- Hottest Forecast Summary Cards -->
-        <div class="grid-2" style="margin-bottom: 1.75rem;">
-            <div class="card dashboard-telemetry-card" style="margin-bottom: 0; border-left: 4px solid #f97316;">
-                <div class="form-label" style="color: #fb923c; font-weight: 700; display: flex; align-items: center; gap: 0.4rem;">
+        <div class="grid-2" style="margin-bottom: 2rem;">
+            <div class="card dashboard-telemetry-card" style="margin-bottom: 0; border-top: 5px solid #f97316; background: linear-gradient(135deg, #fff7ed 0%, #ffffff 100%);">
+                <div class="form-label" style="color: #c2410c; font-weight: 800; font-size: 1.05rem; display: flex; align-items: center; gap: 0.45rem;">
                     <i class="fa-solid fa-clock"></i> Peak Hottest Forecast Hour (Next 24h)
                 </div>
                 {% if hottest_hour %}
-                    <div style="font-size: 2.35rem; font-weight: 800; color: #fb923c; margin: 0.35rem 0;">
+                    <div style="font-size: 2.85rem; font-weight: 800; color: #ea580c; margin: 0.45rem 0;">
                         {{ hottest_hour.temperature_c|temp_display:temp_unit }}
                     </div>
-                    <div style="font-size: 0.85rem; color: var(--color-text-main);">
+                    <div style="font-size: 0.95rem; color: #0f172a;">
                         Target Time: <strong>{{ hottest_hour.time }}</strong>
                     </div>
                     {% if peak_heat_index_hour %}
-                        <div style="font-size: 0.85rem; color: #fdba74; margin-top: 0.35rem;">
+                        <div style="font-size: 0.95rem; color: #c2410c; margin-top: 0.45rem; font-weight: 600;">
                             <i class="fa-solid fa-temperature-arrow-up"></i> Peak Heat Index: <strong>{{ peak_heat_index_hour.heat_index.heat_index_c|temp_display:temp_unit }}</strong>
                             at {{ peak_heat_index_hour.time }} ({{ peak_heat_index_hour.heat_index.risk.label }})
                         </div>
                     {% endif %}
                 {% else %}
-                    <div style="color: var(--color-text-muted);">Not available</div>
+                    <div style="color: #94a3b8;">Not available</div>
                 {% endif %}
             </div>
 
-            <div class="card dashboard-telemetry-card" style="margin-bottom: 0; border-left: 4px solid #ea580c;">
-                <div class="form-label" style="color: #fb923c; font-weight: 700; display: flex; align-items: center; gap: 0.4rem;">
+            <div class="card dashboard-telemetry-card" style="margin-bottom: 0; border-top: 5px solid #10b981; background: linear-gradient(135deg, #f0fdf4 0%, #ffffff 100%);">
+                <div class="form-label" style="color: #047857; font-weight: 800; font-size: 1.05rem; display: flex; align-items: center; gap: 0.45rem;">
                     <i class="fa-solid fa-calendar-day"></i> Peak Hottest Forecast Day (7-Day Horizon)
                 </div>
                 {% if hottest_day %}
-                    <div style="font-size: 2.35rem; font-weight: 800; color: #fb923c; margin: 0.35rem 0;">
+                    <div style="font-size: 2.85rem; font-weight: 800; color: #059669; margin: 0.45rem 0;">
                         {{ hottest_day.max_temp_c|temp_display:temp_unit }}
                     </div>
-                    <div style="font-size: 0.85rem; color: var(--color-text-main);">
+                    <div style="font-size: 0.95rem; color: #0f172a;">
                         Peak Date: <strong>{{ hottest_day.date }}</strong>
                         {% if hottest_day.apparent_max_c is not None %}
                             &bull; Provider Apparent Max: <strong>{{ hottest_day.apparent_max_c|temp_display:temp_unit }}</strong>
                         {% endif %}
                     </div>
                 {% else %}
-                    <div style="color: var(--color-text-muted);">Not available</div>
+                    <div style="color: #94a3b8;">Not available</div>
                 {% endif %}
             </div>
         </div>
 
         <!-- Practical Safety Guidance for Peak Forecast Outlook -->
         {% if peak_safety_guidance %}
-            <div class="card" style="background: rgba(30, 41, 59, 0.7); border-left: 4px solid #f97316; margin-bottom: 1.75rem;">
-                <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.65rem; flex-wrap: wrap; gap: 0.35rem;">
-                    <h4 style="margin: 0; font-size: 1.05rem; color: #ffffff; display: flex; align-items: center; gap: 0.45rem;">
-                        <i class="fa-solid fa-shield-heart" style="color: #f97316;"></i> Targeted Guidance for Forecast Peak: {{ peak_safety_guidance.headline }}
+            <div class="card" style="background: #ffffff; border-left: 6px solid #f97316; margin-bottom: 2rem;">
+                <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.75rem; flex-wrap: wrap; gap: 0.45rem;">
+                    <h4 style="margin: 0; font-size: 1.2rem; font-weight: 800; color: #0f172a; display: flex; align-items: center; gap: 0.5rem;">
+                        <i class="fa-solid fa-shield-heart" style="color: #ea580c;"></i> Targeted Guidance for Forecast Peak: {{ peak_safety_guidance.headline }}
                     </h4>
-                    <a href="{% url 'monitoring:safety_guidance' %}" style="font-size: 0.825rem; color: #60a5fa; text-decoration: underline;">
+                    <a href="{% url 'monitoring:safety_guidance' %}" style="font-size: 0.9rem; color: #0284c7; text-decoration: underline; font-weight: 700;">
                         Public Health Guidelines &rarr;
                     </a>
                 </div>
-                <div style="font-size: 0.88rem; color: var(--color-text-muted); margin-bottom: 0.75rem;">
+                <div style="font-size: 0.95rem; color: #475569; margin-bottom: 0.85rem; line-height: 1.6;">
                     {{ peak_safety_guidance.summary }}
                 </div>
-                <div class="grid-2" style="font-size: 0.85rem; line-height: 1.6;">
+                <div class="grid-2" style="font-size: 0.92rem; line-height: 1.7; color: #0f172a;">
                     <div>
-                        <p style="margin: 0 0 0.35rem;"><strong>Hydration:</strong> {{ peak_safety_guidance.hydration }}</p>
+                        <p style="margin: 0 0 0.45rem;"><strong>Hydration:</strong> {{ peak_safety_guidance.hydration }}</p>
                         <p style="margin: 0;"><strong>Shade & Rest:</strong> {{ peak_safety_guidance.shade_and_rest }}</p>
                     </div>
                     <div>
-                        <p style="margin: 0 0 0.35rem;"><strong>Outdoor Work:</strong> {{ peak_safety_guidance.outdoor_activity }}</p>
+                        <p style="margin: 0 0 0.45rem;"><strong>Outdoor Work:</strong> {{ peak_safety_guidance.outdoor_activity }}</p>
                         <p style="margin: 0;"><strong>Warning Signs:</strong> {{ peak_safety_guidance.warning_signs }}</p>
                     </div>
                 </div>
-                <div style="margin-top: 0.75rem; font-size: 0.825rem; color: #fca5a5; border-top: 1px dashed rgba(239, 68, 68, 0.3); padding-top: 0.45rem;">
+                <div style="margin-top: 0.85rem; font-size: 0.9rem; color: #991b1b; border-top: 1px dashed #fca5a5; padding-top: 0.55rem;">
                     <strong>Emergency Directive:</strong> In suspected heatstroke, call local emergency medical services immediately.
                 </div>
             </div>
         {% endif %}
 
         <!-- Next 24-Hour Hourly Forecast Section with Pure CSS Bar Visualization -->
-        <div style="margin-bottom: 2.25rem;">
-            <h3 style="margin: 0 0 0.5rem; font-size: 1.25rem; font-weight: 700; color: #ffffff; display: flex; align-items: center; gap: 0.5rem;">
-                <i class="fa-solid fa-chart-column" style="color: #f97316;"></i> Next 24-Hour Hourly Temperature & Heat Index Outlook
+        <div style="margin-bottom: 2.75rem;">
+            <h3 style="margin: 0 0 0.65rem; font-size: 1.4rem; font-weight: 800; color: #0f172a; display: flex; align-items: center; gap: 0.5rem;">
+                <i class="fa-solid fa-chart-column" style="color: #ea580c;"></i> Next 24-Hour Hourly Temperature & Heat Index Outlook
             </h3>
-            <p style="font-size: 0.85rem; color: var(--color-text-muted); margin: 0 0 1.25rem;">
+            <p style="font-size: 0.95rem; color: #475569; margin: 0 0 1.5rem;">
                 Visual display generated from actual provider temperature numbers. Missing metrics are labeled without synthetic values.
             </p>
 
             <!-- Accessible CSS Bar Visualization -->
-            <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 1.25rem 0.75rem; overflow-x: auto; margin-bottom: 1.5rem;">
-                <div style="display: flex; gap: 0.65rem; align-items: flex-end; height: 180px; min-width: 720px; padding: 0 0.5rem;">
+            <div style="background: #ffffff; border: 2px solid #e2e8f0; border-radius: var(--radius-md); padding: 1.5rem 1rem; overflow-x: auto; margin-bottom: 1.75rem; box-shadow: var(--shadow-sm);">
+                <div style="display: flex; gap: 0.75rem; align-items: flex-end; height: 200px; min-width: 780px; padding: 0 0.75rem;">
                     {% for h in processed_hourly %}
                         {% if h.temperature_c is not None %}
                             <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%;">
-                                <span style="font-size: 0.75rem; font-weight: 700; color: #fb923c; margin-bottom: 4px;">
+                                <span style="font-size: 0.8rem; font-weight: 800; color: #c2410c; margin-bottom: 4px;">
                                     {{ h.temperature_c|temp_display:temp_unit }}
                                 </span>
                                 <div 
-                                    style="width: 100%; max-width: 20px; height: {{ h.bar_height }}%; background: {% if h.temperature_c >= 40 %}linear-gradient(to top, #ea580c, #dc2626){% elif h.temperature_c >= 35 %}linear-gradient(to top, #f97316, #ea580c){% elif h.temperature_c >= 30 %}linear-gradient(to top, #f59e0b, #f97316){% else %}linear-gradient(to top, #10b981, #06b6d4){% endif %}; border-radius: 4px 4px 0 0; box-shadow: 0 2px 8px rgba(249, 115, 22, 0.25);"
+                                    style="width: 100%; max-width: 24px; height: {{ h.bar_height }}%; background: {% if h.temperature_c >= 40 %}#dc2626{% elif h.temperature_c >= 35 %}#ea580c{% elif h.temperature_c >= 30 %}#f59e0b{% else %}#10b981{% endif %}; border-radius: 4px 4px 0 0; box-shadow: 0 2px 6px rgba(0,0,0,0.15);"
                                     title="Time: {{ h.time }} | Temp: {{ h.temperature_c|temp_display:temp_unit }}"
                                 ></div>
-                                <span style="font-size: 0.7rem; color: var(--color-text-muted); margin-top: 6px; white-space: nowrap; font-family: ui-monospace, monospace;">
+                                <span style="font-size: 0.75rem; color: #64748b; margin-top: 6px; white-space: nowrap; font-family: ui-monospace, monospace; font-weight: 600;">
                                     {{ h.time|slice:"11:16" }}
                                 </span>
                             </div>
@@ -207,46 +207,46 @@
                         {% for h in processed_hourly %}
                             <tr>
                                 <td><strong>{{ h.time }}</strong></td>
-                                <td style="font-weight: 700; color: #fb923c;">
+                                <td style="font-weight: 800; color: #ea580c;">
                                     {% if h.temperature_c is not None %}
                                         {{ h.temperature_c|temp_display:temp_unit }}
                                     {% else %}
-                                        <span style="color: var(--color-text-muted);">Not available</span>
+                                        <span style="color: #94a3b8;">Not available</span>
                                     {% endif %}
                                 </td>
                                 <td>
                                     {% if h.relative_humidity is not None %}
                                         {{ h.relative_humidity }}%
                                     {% else %}
-                                        <span style="color: var(--color-text-muted);">Not available</span>
+                                        <span style="color: #94a3b8;">Not available</span>
                                     {% endif %}
                                 </td>
                                 <td>
                                     {% if h.heat_index %}
-                                        <strong>{{ h.heat_index.heat_index_c|temp_display:temp_unit }}</strong>
-                                        <div style="font-size: 0.725rem; color: var(--color-text-muted);">{{ h.heat_index.method_used }}</div>
+                                        <strong style="color: #0f172a;">{{ h.heat_index.heat_index_c|temp_display:temp_unit }}</strong>
+                                        <div style="font-size: 0.78rem; color: #64748b;">{{ h.heat_index.method_used }}</div>
                                     {% else %}
-                                        <span style="color: var(--color-text-muted);">Not available</span>
+                                        <span style="color: #94a3b8;">Not available</span>
                                     {% endif %}
                                 </td>
                                 <td>
                                     {% if h.heat_index %}
                                         {% include 'monitoring/partials/risk_badge.html' with badge_class=h.heat_index.risk.badge_class label=h.heat_index.risk.label %}
                                     {% else %}
-                                        <span style="color: var(--color-text-muted); font-size: 0.8rem;">—</span>
+                                        <span style="color: #94a3b8; font-size: 0.85rem;">—</span>
                                     {% endif %}
                                 </td>
                                 <td>
                                     {% if h.wind_speed_kmh is not None %}
                                         {{ h.wind_speed_kmh }} km/h
                                     {% else %}
-                                        <span style="color: var(--color-text-muted);">Not available</span>
+                                        <span style="color: #94a3b8;">Not available</span>
                                     {% endif %}
                                 </td>
                             </tr>
                         {% empty %}
                             <tr>
-                                <td colspan="6" style="text-align: center; color: var(--color-text-muted);">No hourly forecast items returned.</td>
+                                <td colspan="6" style="text-align: center; color: #64748b;">No hourly forecast items returned.</td>
                             </tr>
                         {% endfor %}
                     </tbody>
@@ -255,9 +255,9 @@
         </div>
 
         <!-- 7-Day Daily Forecast Section -->
-        <div style="margin-bottom: 2.25rem;">
-            <h3 style="margin: 0 0 0.5rem; font-size: 1.25rem; font-weight: 700; color: #ffffff; display: flex; align-items: center; gap: 0.5rem;">
-                <i class="fa-solid fa-calendar-week" style="color: #38bdf8;"></i> 7-Day Daily Weather Outlook (Open-Meteo)
+        <div style="margin-bottom: 2.75rem;">
+            <h3 style="margin: 0 0 0.65rem; font-size: 1.4rem; font-weight: 800; color: #0f172a; display: flex; align-items: center; gap: 0.5rem;">
+                <i class="fa-solid fa-calendar-week" style="color: #059669;"></i> 7-Day Daily Weather Outlook (Open-Meteo)
             </h3>
             <div class="table-responsive">
                 <table class="data-table">
@@ -277,45 +277,45 @@
                                 <td><strong>{{ d.date }}</strong></td>
                                 <td>
                                     {% if d.max_temp_c is not None %}
-                                        <span style="color: #fb923c; font-weight: 700;">{{ d.max_temp_c|temp_display:temp_unit }}</span>
+                                        <span style="color: #ea580c; font-weight: 800;">{{ d.max_temp_c|temp_display:temp_unit }}</span>
                                     {% else %}
-                                        <span style="color: var(--color-text-muted);">Not available</span>
+                                        <span style="color: #94a3b8;">Not available</span>
                                     {% endif %}
                                 </td>
                                 <td>
                                     {% if d.min_temp_c is not None %}
-                                        <span style="color: #38bdf8;">{{ d.min_temp_c|temp_display:temp_unit }}</span>
+                                        <span style="color: #0284c7; font-weight: 700;">{{ d.min_temp_c|temp_display:temp_unit }}</span>
                                     {% else %}
-                                        <span style="color: var(--color-text-muted);">Not available</span>
+                                        <span style="color: #94a3b8;">Not available</span>
                                     {% endif %}
                                 </td>
                                 <td>
                                     {% if d.apparent_max_c is not None %}
                                         {{ d.apparent_max_c|temp_display:temp_unit }}
                                     {% else %}
-                                        <span style="color: var(--color-text-muted);">Not available</span>
+                                        <span style="color: #94a3b8;">Not available</span>
                                     {% endif %}
                                 </td>
                                 <td>
                                     {% if d.apparent_min_c is not None %}
                                         {{ d.apparent_min_c|temp_display:temp_unit }}
                                     {% else %}
-                                        <span style="color: var(--color-text-muted);">Not available</span>
+                                        <span style="color: #94a3b8;">Not available</span>
                                     {% endif %}
                                 </td>
                                 <td style="width: 25%;">
                                     {% if d.max_temp_c is not None %}
-                                        <div style="background-color: rgba(255,255,255,0.08); border-radius: 4px; height: 10px; width: 100%; overflow: hidden;">
-                                            <div style="background: var(--primary-gradient); height: 100%; width: {{ d.bar_width }}%; border-radius: 4px;"></div>
+                                        <div style="background-color: #f1f5f9; border-radius: 6px; height: 12px; width: 100%; overflow: hidden; border: 1px solid #e2e8f0;">
+                                            <div style="background: var(--primary-gradient); height: 100%; width: {{ d.bar_width }}%; border-radius: 6px;"></div>
                                         </div>
                                     {% else %}
-                                        <span style="color: var(--color-text-muted); font-size: 0.8rem;">No bar</span>
+                                        <span style="color: #94a3b8; font-size: 0.85rem;">No bar</span>
                                     {% endif %}
                                 </td>
                             </tr>
                         {% empty %}
                             <tr>
-                                <td colspan="6" style="text-align: center; color: var(--color-text-muted);">No daily forecast data available.</td>
+                                <td colspan="6" style="text-align: center; color: #64748b;">No daily forecast data available.</td>
                             </tr>
                         {% endfor %}
                     </tbody>
@@ -326,7 +326,7 @@
         {% include 'monitoring/partials/state_box.html' with title="No Location Selected" message="Please select an active station to load the heatwave forecast outlook." %}
     {% endif %}
 
-    <div style="margin-top: 2rem; display: flex; gap: 0.85rem; flex-wrap: wrap;">
+    <div style="margin-top: 2.5rem; display: flex; gap: 1rem; flex-wrap: wrap;">
         <a href="{% url 'monitoring:city_search' %}" class="btn btn-secondary">
             <i class="fa-solid fa-arrow-left"></i> Back to Stations
         </a>

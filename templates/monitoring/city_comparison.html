@@ -8,13 +8,13 @@
 <div class="card">
     <div class="card-header">
         <div>
-            <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
-                <h2 style="margin: 0; font-size: 1.85rem; font-weight: 800; color: #ffffff;">
+            <div style="display: flex; align-items: center; gap: 0.85rem; flex-wrap: wrap;">
+                <h2 style="margin: 0; font-size: 2.2rem; font-weight: 800; color: #0f172a;">
                     Comparative Thermal Stress Analysis
                 </h2>
                 <span class="tag-provenance"><i class="fa-solid fa-scale-balanced"></i> application-calculated</span>
             </div>
-            <p style="margin: 0.35rem 0 0; color: var(--color-text-muted); font-size: 0.9rem;">
+            <p style="margin: 0.45rem 0 0; color: #475569; font-size: 1.05rem;">
                 Compare current weather conditions and heat index estimates for up to 3 cities using live provider data.
             </p>
         </div>
@@ -34,69 +34,69 @@
         </div>
         {% endif %}
 
-        <div class="grid-3" style="margin-bottom: 1.5rem;">
+        <div class="grid-3" style="margin-bottom: 2rem;">
             <!-- City 1 (Required) -->
-            <fieldset class="card" style="background: rgba(15, 23, 42, 0.6); border: 1px solid var(--color-border); margin-bottom: 0; padding: 1.25rem;">
-                <legend style="padding: 0 0.5rem; font-weight: 700; color: #f97316; font-size: 0.95rem;">
+            <fieldset class="card" style="background: #fff7ed; border: 2px solid #fed7aa; margin-bottom: 0; padding: 1.5rem;">
+                <legend style="padding: 0 0.65rem; font-weight: 800; color: #c2410c; font-size: 1.05rem;">
                     <i class="fa-solid fa-1"></i> City 1 (Required)
                 </legend>
-                <div class="form-group" style="margin-bottom: 1rem;">
-                    <label for="{{ form.station_1.id_for_label }}" class="form-label" style="color: #ffffff; font-weight: 600;">{{ form.station_1.label }}</label>
+                <div class="form-group" style="margin-bottom: 1.25rem;">
+                    <label for="{{ form.station_1.id_for_label }}" class="form-label" style="color: #0f172a; font-weight: 700;">{{ form.station_1.label }}</label>
                     {{ form.station_1 }}
-                    {% for error in form.station_1.errors %}<p style="color: #fca5a5; font-size: 0.8rem; margin: 0.25rem 0 0;">{{ error }}</p>{% endfor %}
+                    {% for error in form.station_1.errors %}<p style="color: #dc2626; font-size: 0.85rem; margin: 0.35rem 0 0;">{{ error }}</p>{% endfor %}
                 </div>
                 <div class="form-group" style="margin-bottom: 0;">
-                    <label for="{{ form.city_name_1.id_for_label }}" class="form-label" style="color: #ffffff; font-weight: 600;">{{ form.city_name_1.label }}</label>
+                    <label for="{{ form.city_name_1.id_for_label }}" class="form-label" style="color: #0f172a; font-weight: 700;">{{ form.city_name_1.label }}</label>
                     {{ form.city_name_1 }}
-                    {% for error in form.city_name_1.errors %}<p style="color: #fca5a5; font-size: 0.8rem; margin: 0.25rem 0 0;">{{ error }}</p>{% endfor %}
+                    {% for error in form.city_name_1.errors %}<p style="color: #dc2626; font-size: 0.85rem; margin: 0.35rem 0 0;">{{ error }}</p>{% endfor %}
                 </div>
             </fieldset>
 
             <!-- City 2 (Required) -->
-            <fieldset class="card" style="background: rgba(15, 23, 42, 0.6); border: 1px solid var(--color-border); margin-bottom: 0; padding: 1.25rem;">
-                <legend style="padding: 0 0.5rem; font-weight: 700; color: #38bdf8; font-size: 0.95rem;">
+            <fieldset class="card" style="background: #f0fdf4; border: 2px solid #bbf7d0; margin-bottom: 0; padding: 1.5rem;">
+                <legend style="padding: 0 0.65rem; font-weight: 800; color: #047857; font-size: 1.05rem;">
                     <i class="fa-solid fa-2"></i> City 2 (Required)
                 </legend>
-                <div class="form-group" style="margin-bottom: 1rem;">
-                    <label for="{{ form.station_2.id_for_label }}" class="form-label" style="color: #ffffff; font-weight: 600;">{{ form.station_2.label }}</label>
+                <div class="form-group" style="margin-bottom: 1.25rem;">
+                    <label for="{{ form.station_2.id_for_label }}" class="form-label" style="color: #0f172a; font-weight: 700;">{{ form.station_2.label }}</label>
                     {{ form.station_2 }}
-                    {% for error in form.station_2.errors %}<p style="color: #fca5a5; font-size: 0.8rem; margin: 0.25rem 0 0;">{{ error }}</p>{% endfor %}
+                    {% for error in form.station_2.errors %}<p style="color: #dc2626; font-size: 0.85rem; margin: 0.35rem 0 0;">{{ error }}</p>{% endfor %}
                 </div>
                 <div class="form-group" style="margin-bottom: 0;">
-                    <label for="{{ form.city_name_2.id_for_label }}" class="form-label" style="color: #ffffff; font-weight: 600;">{{ form.city_name_2.label }}</label>
+                    <label for="{{ form.city_name_2.id_for_label }}" class="form-label" style="color: #0f172a; font-weight: 700;">{{ form.city_name_2.label }}</label>
                     {{ form.city_name_2 }}
-                    {% for error in form.city_name_2.errors %}<p style="color: #fca5a5; font-size: 0.8rem; margin: 0.25rem 0 0;">{{ error }}</p>{% endfor %}
+                    {% for error in form.city_name_2.errors %}<p style="color: #dc2626; font-size: 0.85rem; margin: 0.35rem 0 0;">{{ error }}</p>{% endfor %}
                 </div>
             </fieldset>
 
             <!-- City 3 (Optional) -->
-            <fieldset class="card" style="background: rgba(15, 23, 42, 0.6); border: 1px solid var(--color-border); margin-bottom: 0; padding: 1.25rem;">
-                <legend style="padding: 0 0.5rem; font-weight: 700; color: var(--color-text-muted); font-size: 0.95rem;">
+            <fieldset class="card" style="background: #f8fafc; border: 2px solid #e2e8f0; margin-bottom: 0; padding: 1.5rem;">
+                <legend style="padding: 0 0.65rem; font-weight: 800; color: #475569; font-size: 1.05rem;">
                     <i class="fa-solid fa-3"></i> City 3 (Optional)
                 </legend>
-                <div class="form-group" style="margin-bottom: 1rem;">
-                    <label for="{{ form.station_3.id_for_label }}" class="form-label" style="color: #ffffff; font-weight: 600;">{{ form.station_3.label }}</label>
+                <div class="form-group" style="margin-bottom: 1.25rem;">
+                    <label for="{{ form.station_3.id_for_label }}" class="form-label" style="color: #0f172a; font-weight: 700;">{{ form.station_3.label }}</label>
                     {{ form.station_3 }}
                 </div>
                 <div class="form-group" style="margin-bottom: 0;">
-                    <label for="{{ form.city_name_3.id_for_label }}" class="form-label" style="color: #ffffff; font-weight: 600;">{{ form.city_name_3.label }}</label>
+                    <label for="{{ form.city_name_3.id_for_label }}" class="form-label" style="color: #0f172a; font-weight: 700;">{{ form.city_name_3.label }}</label>
                     {{ form.city_name_3 }}
                 </div>
             </fieldset>
         </div>
 
-        <button type="submit" class="btn btn-primary">
+        <button type="submit" class="btn btn-primary" style="padding: 0.85rem 1.85rem;">
             <i class="fa-solid fa-chart-simple"></i> Compare Selected Cities
         </button>
     </form>
 </div>
 
 {% if comparison_attempted %}
-<div class="card" style="margin-top: 2rem;">
+<div class="card" style="margin-top: 2.5rem;">
     <div class="card-header">
         <div>
-            <h3 style="margin: 0; font-size: 1.35rem; font-weight: 800; color: #ffffff; display: flex; align-items: center; gap: 0.5rem;">
-                <i class="fa-solid fa-table-columns" style="color: #f97316;"></i> Comparison Results
+            <h3 style="margin: 0; font-size: 1.5rem; font-weight: 800; color: #0f172a; display: flex; align-items: center; gap: 0.5rem;">
+                <i class="fa-solid fa-table-columns" style="color: #ea580c;"></i> Comparison Results
             </h3>
         </div>
         <span class="tag-provenance">provider-supplied &amp; application-calculated</span>
@@ -111,8 +111,8 @@
                     {% for result in comparison_results %}
                     <th>
                         {% if result.location %}
-                            <span style="font-size: 1rem; color: #ffffff;">{{ result.location.name }}</span>
-                            {% if result.location.country %}<div style="font-size: 0.75rem; color: var(--color-text-muted);">{{ result.location.country }}</div>{% endif %}
+                            <span style="font-size: 1.15rem; font-weight: 800; color: #0f172a;">{{ result.location.name }}</span>
+                            {% if result.location.country %}<div style="font-size: 0.82rem; color: #64748b; font-weight: 600;">{{ result.location.country }}</div>{% endif %}
                         {% else %}
                             City {{ result.slot }}
                         {% endif %}
@@ -123,15 +123,15 @@
             <tbody>
                 <!-- Temperature -->
                 <tr>
-                    <td><strong><i class="fa-solid fa-temperature-half" style="color: #fb923c; margin-right: 0.35rem;"></i> Temperature</strong></td>
+                    <td><strong><i class="fa-solid fa-temperature-half" style="color: #ea580c; margin-right: 0.45rem;"></i> Temperature</strong></td>
                     {% for result in comparison_results %}
                     <td>
                         {% if result.error %}
-                            <span style="color: #fca5a5;">⚠ Unavailable</span>
+                            <span style="color: #dc2626; font-weight: 600;">⚠ Unavailable</span>
                         {% elif result.temperature_c is not None %}
-                            <span style="font-weight: 700; color: #fb923c; font-size: 1.1rem;">{{ result.temperature_c|temp_display:temp_unit }}</span>
+                            <span style="font-weight: 800; color: #c2410c; font-size: 1.25rem;">{{ result.temperature_c|temp_display:temp_unit }}</span>
                         {% else %}
-                            <span style="color: var(--color-text-muted);">Not available</span>
+                            <span style="color: #94a3b8;">Not available</span>
                         {% endif %}
                     </td>
                     {% endfor %}
@@ -139,15 +139,15 @@
 
                 <!-- Relative Humidity -->
                 <tr>
-                    <td><strong><i class="fa-solid fa-droplet" style="color: #38bdf8; margin-right: 0.35rem;"></i> Relative Humidity</strong></td>
+                    <td><strong><i class="fa-solid fa-droplet" style="color: #059669; margin-right: 0.45rem;"></i> Relative Humidity</strong></td>
                     {% for result in comparison_results %}
                     <td>
                         {% if result.error %}
-                            <span style="color: #fca5a5;">⚠ Unavailable</span>
+                            <span style="color: #dc2626; font-weight: 600;">⚠ Unavailable</span>
                         {% elif result.relative_humidity is not None %}
-                            {{ result.relative_humidity }}%
+                            <span style="font-weight: 700; color: #0f172a;">{{ result.relative_humidity }}%</span>
                         {% else %}
-                            <span style="color: var(--color-text-muted);">Not available</span>
+                            <span style="color: #94a3b8;">Not available</span>
                         {% endif %}
                     </td>
                     {% endfor %}
@@ -155,15 +155,15 @@
 
                 <!-- Provider Apparent Temperature -->
                 <tr>
-                    <td><strong><i class="fa-solid fa-sun" style="color: #facc15; margin-right: 0.35rem;"></i> Provider Apparent Temp</strong></td>
+                    <td><strong><i class="fa-solid fa-sun" style="color: #ca8a04; margin-right: 0.45rem;"></i> Provider Apparent Temp</strong></td>
                     {% for result in comparison_results %}
                     <td>
                         {% if result.error %}
-                            <span style="color: #fca5a5;">⚠ Unavailable</span>
+                            <span style="color: #dc2626; font-weight: 600;">⚠ Unavailable</span>
                         {% elif result.apparent_temperature_c is not None %}
-                            {{ result.apparent_temperature_c|temp_display:temp_unit }}
+                            <span style="font-weight: 600;">{{ result.apparent_temperature_c|temp_display:temp_unit }}</span>
                         {% else %}
-                            <span style="color: var(--color-text-muted);">Not available</span>
+                            <span style="color: #94a3b8;">Not available</span>
                         {% endif %}
                     </td>
                     {% endfor %}
@@ -171,15 +171,15 @@
 
                 <!-- Wind Speed -->
                 <tr>
-                    <td><strong><i class="fa-solid fa-wind" style="color: #a78bfa; margin-right: 0.35rem;"></i> Wind Speed</strong></td>
+                    <td><strong><i class="fa-solid fa-wind" style="color: #4f46e5; margin-right: 0.45rem;"></i> Wind Speed</strong></td>
                     {% for result in comparison_results %}
                     <td>
                         {% if result.error %}
-                            <span style="color: #fca5a5;">⚠ Unavailable</span>
+                            <span style="color: #dc2626; font-weight: 600;">⚠ Unavailable</span>
                         {% elif result.wind_speed_kmh is not None %}
                             {{ result.wind_speed_kmh }} km/h
                         {% else %}
-                            <span style="color: var(--color-text-muted);">Not available</span>
+                            <span style="color: #94a3b8;">Not available</span>
                         {% endif %}
                     </td>
                     {% endfor %}
@@ -187,15 +187,15 @@
 
                 <!-- Heat Index Estimate -->
                 <tr>
-                    <td><strong><i class="fa-solid fa-fire-flame-curved" style="color: #f97316; margin-right: 0.35rem;"></i> Heat Index Estimate</strong></td>
+                    <td><strong><i class="fa-solid fa-fire-flame-curved" style="color: #ea580c; margin-right: 0.45rem;"></i> Heat Index Estimate</strong></td>
                     {% for result in comparison_results %}
                     <td>
                         {% if result.error %}
-                            <span style="color: #fca5a5;">⚠ Unavailable</span>
+                            <span style="color: #dc2626; font-weight: 600;">⚠ Unavailable</span>
                         {% elif result.heat_index_c is not None %}
-                            <span style="font-weight: 800; font-size: 1.15rem; color: #ea580c;">{{ result.heat_index_c|temp_display:temp_unit }}</span>
+                            <span style="font-weight: 800; font-size: 1.35rem; color: #c2410c;">{{ result.heat_index_c|temp_display:temp_unit }}</span>
                         {% else %}
-                            <span style="color: var(--color-text-muted);">Not applicable</span>
+                            <span style="color: #94a3b8;">Not applicable</span>
                         {% endif %}
                     </td>
                     {% endfor %}
@@ -203,16 +203,16 @@
 
                 <!-- Risk Category -->
                 <tr>
-                    <td><strong><i class="fa-solid fa-shield-halved" style="color: #38bdf8; margin-right: 0.35rem;"></i> Risk Category</strong></td>
+                    <td><strong><i class="fa-solid fa-shield-halved" style="color: #059669; margin-right: 0.45rem;"></i> Risk Category</strong></td>
                     {% for result in comparison_results %}
                     <td>
                         {% if result.error %}
-                            <span style="color: #fca5a5;">⚠ Unavailable</span>
+                            <span style="color: #dc2626; font-weight: 600;">⚠ Unavailable</span>
                         {% elif result.risk_label %}
                             {% include 'monitoring/partials/risk_badge.html' with badge_class=result.risk_badge_class label=result.risk_label %}
-                            <div style="font-size: 0.8rem; color: var(--color-text-muted); margin-top: 0.35rem;">{{ result.risk_description }}</div>
+                            <div style="font-size: 0.88rem; color: #475569; margin-top: 0.45rem; line-height: 1.4;">{{ result.risk_description }}</div>
                         {% else %}
-                            <span style="color: var(--color-text-muted);">Not applicable</span>
+                            <span style="color: #94a3b8;">Not applicable</span>
                         {% endif %}
                     </td>
                     {% endfor %}
@@ -224,9 +224,9 @@
                     {% for result in comparison_results %}
                     <td>
                         {% if result.retrieval_time_ms is not None %}
-                            <span style="font-family: ui-monospace, monospace; font-size: 0.825rem;">{{ result.retrieval_time_ms }} ms</span>
+                            <span style="font-family: ui-monospace, monospace; font-size: 0.88rem; color: #64748b;">{{ result.retrieval_time_ms }} ms</span>
                         {% else %}
-                            <span style="color: var(--color-text-muted);">—</span>
+                            <span style="color: #94a3b8;">—</span>
                         {% endif %}
                     </td>
                     {% endfor %}
@@ -240,7 +240,7 @@
                         {% if result.source %}
                             <span class="tag-provenance">{{ result.source }}</span>
                         {% else %}
-                            <span style="color: var(--color-text-muted);">—</span>
+                            <span style="color: #94a3b8;">—</span>
                         {% endif %}
                     </td>
                     {% endfor %}
@@ -252,7 +252,7 @@
     <!-- Per-city error details -->
     {% for result in comparison_results %}
         {% if result.error %}
-        <div class="alert alert-danger" style="margin-top: 1rem;">
+        <div class="alert alert-danger" style="margin-top: 1.25rem;">
             <i class="fa-solid fa-triangle-exclamation alert-icon"></i>
             <div class="alert-body">
                 <strong>{% if result.location %}{{ result.location.name }}{% else %}City {{ result.slot }}{% endif %}:</strong>
@@ -262,7 +262,7 @@
         {% endif %}
     {% endfor %}
 
-    <p style="margin-top: 1.25rem; font-size: 0.825rem; color: var(--color-text-muted); line-height: 1.5;">
+    <p style="margin-top: 1.5rem; font-size: 0.88rem; color: #64748b; line-height: 1.6;">
         <strong>Source:</strong> Weather data by Open-Meteo.com (CC BY 4.0).
         Heat Index estimates use the NWS Rothfusz regression method.
         This is an educational comparison — not an official advisory.

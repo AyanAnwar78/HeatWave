@@ -7,11 +7,11 @@
     maxZoom: 12
   });
 
-  // Standard high-availability OpenStreetMap raster tile layer
-  const basemap = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  // High-availability CARTO Voyager raster tile layer (reliable, public, no 403 blocks)
+  const basemap = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
     maxZoom: 19,
-    subdomains: ['a', 'b', 'c'],
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    subdomains: ['a', 'b', 'c', 'd'],
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
   }).addTo(map);
 
   let tileErrorShown = false;

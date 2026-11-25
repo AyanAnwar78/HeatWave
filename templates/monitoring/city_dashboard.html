@@ -8,13 +8,13 @@
     <!-- Header with Geographic Details & Provenance -->
     <div class="card-header">
         <div>
-            <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
-                <h2 class="dashboard-location-title" style="margin: 0; font-size: 1.85rem; font-weight: 800;">
+            <div style="display: flex; align-items: center; gap: 0.85rem; flex-wrap: wrap;">
+                <h2 class="dashboard-location-title" style="margin: 0; font-size: 2.2rem; font-weight: 800; color: #0f172a;">
                     {{ location.name }}
                 </h2>
                 <span class="tag-provenance"><i class="fa-solid fa-satellite-dish"></i> provider-supplied</span>
             </div>
-            <div class="dashboard-location-meta" style="margin-top: 0.35rem; color: var(--color-text-muted); font-size: 0.9rem;">
+            <div class="dashboard-location-meta" style="margin-top: 0.45rem; color: #475569; font-size: 1rem; font-weight: 500;">
                 <i class="fa-solid fa-location-dot" style="color: #f97316;"></i>
                 {{ location.state_or_region|default:"Region not specified" }}, {{ location.country }}
                 &bull; Coordinates: {{ location.latitude }}°, {{ location.longitude }}°
@@ -23,12 +23,12 @@
                 {% endif %}
             </div>
         </div>
-        <div style="display: flex; gap: 0.65rem; align-items: center; flex-wrap: wrap;">
+        <div style="display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap;">
             {% if user.is_authenticated %}
                 {% if is_saved %}
                     <form method="post" action="{% url 'monitoring:remove_saved_location' location_id=location.id %}" style="display: inline;">
                         {% csrf_token %}
-                        <button type="submit" class="btn btn-secondary" style="color: #ef4444; border-color: rgba(239, 68, 68, 0.4);">
+                        <button type="submit" class="btn btn-secondary" style="color: #dc2626; border-color: #fca5a5;">
                             <i class="fa-solid fa-star"></i> Saved
                         </button>
                     </form>
@@ -48,24 +48,24 @@
     </div>
 
     <!-- Human Thermal Stress Assessment Section Header with Clear Scientific Qualification -->
-    <div style="margin-bottom: 1.5rem; border-bottom: 1px solid var(--color-border); padding-bottom: 0.85rem;">
-        <h3 style="margin: 0 0 0.35rem; font-size: 1.25rem; font-weight: 700; color: #ffffff; display: flex; align-items: center; gap: 0.5rem;">
+    <div style="margin-bottom: 1.75rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 1rem;">
+        <h3 style="margin: 0 0 0.45rem; font-size: 1.4rem; font-weight: 800; color: #0f172a; display: flex; align-items: center; gap: 0.5rem;">
             <i class="fa-solid fa-heart-pulse" style="color: #f97316;"></i>
             Human Thermal Stress Assessment 
-            <span style="font-size: 0.85rem; font-weight: normal; color: var(--color-text-muted);">(Heat Index-based estimate)</span>
+            <span style="font-size: 0.95rem; font-weight: normal; color: #64748b;">(Heat Index-based estimate)</span>
         </h3>
-        <p style="margin: 0; font-size: 0.85rem; color: var(--color-text-muted); line-height: 1.5;">
+        <p style="margin: 0; font-size: 0.95rem; color: #475569; line-height: 1.6;">
             Scientific note: This estimate reflects apparent temperature in shaded conditions based on NOAA/NWS Rothfusz formulations. It is <strong>not</strong> Wet Bulb Globe Temperature (WBGT) and does not quantify direct radiant solar heat load.
         </p>
     </div>
 
     <!-- Live Telemetry or Explicit Error Panel -->
     {% if weather_error %}
-        <div class="ui-state-box error-state" style="margin-top: 0; margin-bottom: 1.75rem;">
-            <i class="fa-solid fa-triangle-exclamation" style="font-size: 2.25rem; color: #ef4444; margin-bottom: 0.75rem;"></i>
-            <h3>Live Telemetry Unavailable</h3>
-            <p>{{ weather_error }}</p>
-            <p style="font-size: 0.825rem; color: var(--color-text-muted);">
+        <div class="ui-state-box error-state" style="margin-top: 0; margin-bottom: 2rem;">
+            <i class="fa-solid fa-triangle-exclamation" style="font-size: 2.75rem; color: #dc2626; margin-bottom: 0.85rem;"></i>
+            <h3 style="color: #991b1b;">Live Telemetry Unavailable</h3>
+            <p style="color: #7f1d1d; font-size: 1.05rem;">{{ weather_error }}</p>
+            <p style="font-size: 0.9rem; color: #64748b;">
                 HeatGuard does not synthesize fallback values. Live metrics will appear when connectivity to the provider is restored.
             </p>
             <a href="{% url 'monitoring:city_dashboard' location_id=location.id %}" class="btn btn-secondary">
@@ -74,66 +74,66 @@
         </div>
     {% elif live_weather %}
         <!-- Responsive Telemetry Metrics Grid -->
-        <div class="grid-4" style="margin-bottom: 1.5rem;">
+        <div class="grid-4" style="margin-bottom: 2rem;">
             <!-- 1. Ambient Temperature -->
-            <div class="card dashboard-telemetry-card">
-                <div class="form-label" style="display: flex; justify-content: space-between; align-items: center;">
-                    <span><i class="fa-solid fa-temperature-three-quarters" style="color: #fb923c; margin-right: 0.35rem;"></i> Ambient Temp</span>
+            <div class="card dashboard-telemetry-card" style="border-top: 4px solid #f97316;">
+                <div class="form-label" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                    <span style="color: #0f172a; font-weight: 700;"><i class="fa-solid fa-temperature-three-quarters" style="color: #ea580c; margin-right: 0.4rem;"></i> Ambient Temp</span>
                     <span class="tag-provenance">provider</span>
                 </div>
-                <div class="dashboard-telemetry-value">
+                <div class="dashboard-telemetry-value" style="color: #0f172a;">
                     {% if live_weather.current.temperature_c is not None %}
                         {{ live_weather.current.temperature_c|temp_display:temp_unit }}
                     {% else %}
-                        <span style="font-size: 1rem; color: var(--color-text-muted);">Not available</span>
+                        <span style="font-size: 1.1rem; color: #94a3b8;">Not available</span>
                     {% endif %}
                 </div>
                 <div class="dashboard-telemetry-meta">Dry-bulb air temperature (2m)</div>
             </div>
 
             <!-- 2. Relative Humidity -->
-            <div class="card dashboard-telemetry-card">
-                <div class="form-label" style="display: flex; justify-content: space-between; align-items: center;">
-                    <span><i class="fa-solid fa-droplet" style="color: #38bdf8; margin-right: 0.35rem;"></i> Relative Humidity</span>
+            <div class="card dashboard-telemetry-card" style="border-top: 4px solid #10b981;">
+                <div class="form-label" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                    <span style="color: #0f172a; font-weight: 700;"><i class="fa-solid fa-droplet" style="color: #059669; margin-right: 0.4rem;"></i> Relative Humidity</span>
                     <span class="tag-provenance">provider</span>
                 </div>
-                <div class="dashboard-telemetry-value">
+                <div class="dashboard-telemetry-value" style="color: #0f172a;">
                     {% if live_weather.current.relative_humidity is not None %}
                         {{ live_weather.current.relative_humidity }}%
                     {% else %}
-                        <span style="font-size: 1rem; color: var(--color-text-muted);">Not available</span>
+                        <span style="font-size: 1.1rem; color: #94a3b8;">Not available</span>
                     {% endif %}
                 </div>
                 <div class="dashboard-telemetry-meta">Surface moisture level</div>
             </div>
 
             <!-- 3. Provider Apparent Temp -->
-            <div class="card dashboard-telemetry-card">
-                <div class="form-label" style="display: flex; justify-content: space-between; align-items: center;">
-                    <span><i class="fa-solid fa-sun" style="color: #facc15; margin-right: 0.35rem;"></i> Provider Apparent</span>
+            <div class="card dashboard-telemetry-card" style="border-top: 4px solid #eab308;">
+                <div class="form-label" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                    <span style="color: #0f172a; font-weight: 700;"><i class="fa-solid fa-sun" style="color: #ca8a04; margin-right: 0.4rem;"></i> Provider Apparent</span>
                     <span class="tag-provenance">provider</span>
                 </div>
-                <div class="dashboard-telemetry-value">
+                <div class="dashboard-telemetry-value" style="color: #0f172a;">
                     {% if live_weather.current.apparent_temperature_c is not None %}
                         {{ live_weather.current.apparent_temperature_c|temp_display:temp_unit }}
                     {% else %}
-                        <span style="font-size: 1rem; color: var(--color-text-muted);">Not available</span>
+                        <span style="font-size: 1.1rem; color: #94a3b8;">Not available</span>
                     {% endif %}
                 </div>
                 <div class="dashboard-telemetry-meta">Open-Meteo model index</div>
             </div>
 
             <!-- 4. Wind Speed -->
-            <div class="card dashboard-telemetry-card">
-                <div class="form-label" style="display: flex; justify-content: space-between; align-items: center;">
-                    <span><i class="fa-solid fa-wind" style="color: #a78bfa; margin-right: 0.35rem;"></i> Wind Speed</span>
+            <div class="card dashboard-telemetry-card" style="border-top: 4px solid #6366f1;">
+                <div class="form-label" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                    <span style="color: #0f172a; font-weight: 700;"><i class="fa-solid fa-wind" style="color: #4f46e5; margin-right: 0.4rem;"></i> Wind Speed</span>
                     <span class="tag-provenance">provider</span>
                 </div>
-                <div class="dashboard-telemetry-value">
+                <div class="dashboard-telemetry-value" style="color: #0f172a;">
                     {% if live_weather.current.wind_speed_kmh is not None %}
                         {{ live_weather.current.wind_speed_kmh }} km/h
                     {% else %}
-                        <span style="font-size: 1rem; color: var(--color-text-muted);">Not available</span>
+                        <span style="font-size: 1.1rem; color: #94a3b8;">Not available</span>
                     {% endif %}
                 </div>
                 <div class="dashboard-telemetry-meta">Standard 10m height</div>
@@ -141,42 +141,42 @@
         </div>
 
         <!-- Heat Index Estimate & Educational Risk Summary Card -->
-        <div class="card" style="background: rgba(30, 41, 59, 0.7); border-left: 4px solid #f97316; margin-bottom: 1.5rem;">
+        <div class="card" style="background: linear-gradient(135deg, #fff7ed 0%, #ffffff 100%); border-left: 6px solid #f97316; margin-bottom: 2rem; border-color: #fed7aa;">
             <div class="grid-2">
                 <div>
                     <div class="form-label" style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
-                        <span style="font-size: 0.95rem; font-weight: 700; color: #ffffff;"><i class="fa-solid fa-fire-flame-curved" style="color: #f97316;"></i> Heat Index Apparent-Temperature</span>
+                        <span style="font-size: 1.1rem; font-weight: 800; color: #0f172a;"><i class="fa-solid fa-fire-flame-curved" style="color: #ea580c;"></i> Heat Index Apparent-Temperature</span>
                         <span class="tag-provenance">application-calculated</span>
                     </div>
-                    <div style="font-size: 2.75rem; font-weight: 800; color: #fb923c; line-height: 1;">
+                    <div style="font-size: 3.2rem; font-weight: 800; color: #c2410c; line-height: 1; margin: 0.5rem 0;">
                         {% if hi_result.heat_index_c is not None %}
                             {{ hi_result.heat_index_c|temp_display:temp_unit }}
                         {% else %}
-                            <span style="font-size: 1.2rem; color: var(--color-text-muted);">Not available</span>
+                            <span style="font-size: 1.3rem; color: #94a3b8;">Not available</span>
                         {% endif %}
                     </div>
                     {% if hi_result %}
-                        <div style="font-size: 0.8rem; color: var(--color-text-muted); margin-top: 0.5rem;">
+                        <div style="font-size: 0.88rem; color: #64748b; margin-top: 0.5rem;">
                             <i class="fa-solid fa-calculator"></i> Method: {{ hi_result.method_used }} &bull; Adjustment: {{ hi_result.adjustment_applied }}
                         </div>
                     {% endif %}
                 </div>
 
                 <div>
-                    <div class="form-label" style="font-size: 0.95rem; font-weight: 700; color: #ffffff; margin-bottom: 0.5rem;">
-                        <i class="fa-solid fa-shield-halved" style="color: #38bdf8;"></i> Assigned Screening Category
+                    <div class="form-label" style="font-size: 1.1rem; font-weight: 800; color: #0f172a; margin-bottom: 0.5rem;">
+                        <i class="fa-solid fa-shield-halved" style="color: #059669;"></i> Assigned Screening Category
                     </div>
-                    <div style="margin: 0.5rem 0;">
+                    <div style="margin: 0.65rem 0;">
                         {% if hi_result %}
-                            <span class="badge {{ hi_result.risk.badge_class }}" style="font-size: 0.95rem; padding: 0.4rem 0.9rem;">
+                            <span class="badge {{ hi_result.risk.badge_class }}" style="font-size: 1.05rem; padding: 0.45rem 1.15rem;">
                                 {{ hi_result.risk.category }} &mdash; {{ hi_result.risk.label }}
                             </span>
                         {% else %}
-                            <span style="color: var(--color-text-muted);">Not available</span>
+                            <span style="color: #94a3b8;">Not available</span>
                         {% endif %}
                     </div>
                     {% if hi_result %}
-                        <div style="font-size: 0.88rem; color: var(--color-text-main); margin-top: 0.5rem; line-height: 1.5;">
+                        <div style="font-size: 0.95rem; color: #1e293b; margin-top: 0.65rem; line-height: 1.6;">
                             <strong>Assessment:</strong> {{ hi_result.risk.description }}
                         </div>
                     {% endif %}
@@ -184,35 +184,35 @@
             </div>
 
             <!-- Short Explanation & Comprehensive Practical Safety Guidance -->
-            <div style="margin-top: 1.25rem; padding-top: 1rem; border-top: 1px solid var(--color-border);">
+            <div style="margin-top: 1.5rem; padding-top: 1.25rem; border-top: 1px solid #fed7aa;">
                 {% if hi_result %}
-                    <div style="font-size: 0.88rem; color: var(--color-text-main); margin-bottom: 0.75rem;">
-                        <strong><i class="fa-solid fa-circle-info" style="color: #38bdf8;"></i> Why this category was assigned:</strong> {{ hi_result.explanation }}
+                    <div style="font-size: 0.95rem; color: #0f172a; margin-bottom: 1rem;">
+                        <strong><i class="fa-solid fa-circle-info" style="color: #ea580c;"></i> Why this category was assigned:</strong> {{ hi_result.explanation }}
                     </div>
                 {% else %}
-                    <div style="font-size: 0.88rem; color: var(--color-text-muted); margin-bottom: 0.75rem;">
+                    <div style="font-size: 0.95rem; color: #64748b; margin-bottom: 1rem;">
                         Heat Index assessment is unavailable because temperature or relative humidity was not provided.
                     </div>
                 {% endif %}
 
                 {% if safety_guidance %}
-                    <div class="alert alert-info" style="margin-bottom: 0; font-size: 0.88rem;">
-                        <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.65rem; flex-wrap: wrap; gap: 0.35rem; width: 100%;">
-                            <strong style="font-size: 1rem; color: #38bdf8;">
+                    <div class="alert alert-info" style="margin-bottom: 0; font-size: 0.92rem; background: #ffffff; border: 2px solid #bae6fd;">
+                        <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.75rem; flex-wrap: wrap; gap: 0.5rem; width: 100%;">
+                            <strong style="font-size: 1.1rem; color: #0369a1;">
                                 <i class="fa-solid fa-kit-medical"></i> Recommended Precautions: {{ safety_guidance.headline }}
                             </strong>
-                            <a href="{% url 'monitoring:safety_guidance' %}" style="font-size: 0.825rem; color: #60a5fa; text-decoration: underline;">
+                            <a href="{% url 'monitoring:safety_guidance' %}" style="font-size: 0.88rem; color: #0284c7; text-decoration: underline; font-weight: 700;">
                                 Full Health Guide &rarr;
                             </a>
                         </div>
-                        <ul style="margin: 0; padding-left: 1.25rem; font-size: 0.85rem; line-height: 1.6;">
+                        <ul style="margin: 0; padding-left: 1.4rem; font-size: 0.92rem; line-height: 1.7; color: #0f172a;">
                             <li><strong>Hydration:</strong> {{ safety_guidance.hydration }}</li>
                             <li><strong>Shade & Rest:</strong> {{ safety_guidance.shade_and_rest }}</li>
                             <li><strong>Outdoor Strenuous Activity:</strong> {{ safety_guidance.outdoor_activity }}</li>
                             <li><strong>Vulnerable Care:</strong> {{ safety_guidance.vulnerable_care }}</li>
                             <li><strong>Heat-Illness Warning Signs:</strong> {{ safety_guidance.warning_signs }}</li>
                         </ul>
-                        <div style="margin-top: 0.75rem; font-size: 0.825rem; color: #fca5a5; border-top: 1px dashed rgba(239, 68, 68, 0.3); padding-top: 0.5rem;">
+                        <div style="margin-top: 0.85rem; font-size: 0.88rem; color: #991b1b; border-top: 1px dashed #fca5a5; padding-top: 0.65rem;">
                             <strong><i class="fa-solid fa-phone-volume"></i> Emergency Notice:</strong> If anyone exhibits confusion, fainting, vomiting, or body temperature above 39.5°C (103°F), seek urgent local medical assistance (108/112/911) immediately.
                         </div>
                     </div>
@@ -221,7 +221,7 @@
         </div>
 
         <!-- Data Source Attribution & Model Context Area -->
-        <div class="dashboard-attribution" style="background: rgba(15, 23, 42, 0.6); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 1rem 1.25rem; font-size: 0.825rem; color: var(--color-text-muted); margin-bottom: 1.25rem; line-height: 1.6;">
+        <div class="dashboard-attribution" style="background: #f8fafc; border: 1px solid #cbd5e1; border-radius: var(--radius-md); padding: 1.25rem 1.5rem; font-size: 0.88rem; color: #475569; margin-bottom: 1.5rem; line-height: 1.7;">
             <div><strong>Source Attribution:</strong> {{ live_weather.attribution }}</div>
             <div><strong>Model Context:</strong> {{ live_weather.model_context }}</div>
             <div><strong>Provider Observation Time:</strong> {{ live_weather.current.time|default:"Not available" }} {{ live_weather.timezone|default:"provider local time" }}</div>
@@ -229,7 +229,7 @@
         </div>
 
         {% if live_weather.current.time %}
-            <form method="post" style="margin: 0 0 1.75rem;">
+            <form method="post" style="margin: 0 0 2rem;">
                 {% csrf_token %}
                 <input type="hidden" name="action" value="save_reading">
                 <button type="submit" class="btn btn-secondary">
@@ -240,10 +240,10 @@
     {% endif %}
 
     <!-- Relevant Published Official Notices Section -->
-    <div style="margin-top: 2.25rem;">
-        <div class="card-header" style="border-bottom: 1px solid var(--color-border); padding-bottom: 0.75rem; margin-bottom: 1rem;">
-            <h3 style="margin: 0; font-size: 1.2rem; color: #ffffff; display: flex; align-items: center; gap: 0.5rem;">
-                <i class="fa-solid fa-bullhorn" style="color: #f97316;"></i>
+    <div style="margin-top: 2.75rem;">
+        <div class="card-header" style="border-bottom: 2px solid #e2e8f0; padding-bottom: 0.85rem; margin-bottom: 1.25rem;">
+            <h3 style="margin: 0; font-size: 1.35rem; font-weight: 800; color: #0f172a; display: flex; align-items: center; gap: 0.5rem;">
+                <i class="fa-solid fa-bullhorn" style="color: #ea580c;"></i>
                 Published Official Notices & Bulletins for {{ location.name }}
             </h3>
             <span class="tag-provenance">officially published</span>
@@ -265,25 +265,25 @@
                         {% for notice in notices %}
                             <tr>
                                 <td>
-                                    <strong style="color: #ffffff;">{{ notice.title }}</strong>
-                                    <div style="font-size: 0.825rem; color: var(--color-text-muted); margin-top: 0.25rem;">
+                                    <strong style="color: #0f172a; font-size: 1.05rem;">{{ notice.title }}</strong>
+                                    <div style="font-size: 0.88rem; color: #475569; margin-top: 0.35rem;">
                                         {{ notice.message|truncatewords:20 }}
                                     </div>
                                 </td>
-                                <td>{{ notice.issuing_organization }}</td>
+                                <td style="font-weight: 600;">{{ notice.issuing_organization }}</td>
                                 <td>
                                     <span class="badge {% if notice.severity == 'EMERGENCY' %}risk-extreme{% elif notice.severity == 'WARNING' %}risk-very-high{% elif notice.severity == 'WATCH' %}risk-high{% else %}risk-moderate{% endif %}">
                                         {{ notice.severity }}
                                     </span>
                                 </td>
-                                <td>{{ notice.valid_from|date:"M d, H:i" }} &ndash; {{ notice.valid_until|date:"M d, H:i" }}</td>
+                                <td style="font-size: 0.9rem;">{{ notice.valid_from|date:"M d, H:i" }} &ndash; {{ notice.valid_until|date:"M d, H:i" }}</td>
                                 <td>
                                     {% if notice.source_url %}
-                                        <a href="{{ notice.source_url }}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="padding: 0.25rem 0.65rem; font-size: 0.78rem;">
-                                            Source <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.7rem;"></i>
+                                        <a href="{{ notice.source_url }}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="padding: 0.35rem 0.75rem; font-size: 0.82rem;">
+                                            Source <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.75rem;"></i>
                                         </a>
                                     {% else %}
-                                        <span style="color: var(--color-text-muted); font-size: 0.8rem;">Direct Release</span>
+                                        <span style="color: #64748b; font-size: 0.85rem;">Direct Release</span>
                                     {% endif %}
                                 </td>
                             </tr>
@@ -297,9 +297,9 @@
     </div>
 
     <!-- Historical Telemetry Ingestion Log -->
-    <div style="margin-top: 2.25rem;">
-        <h3 style="margin: 0 0 0.75rem; font-size: 1.2rem; color: #ffffff; display: flex; align-items: center; gap: 0.5rem;">
-            <i class="fa-solid fa-list-check" style="color: #38bdf8;"></i>
+    <div style="margin-top: 2.75rem;">
+        <h3 style="margin: 0 0 0.85rem; font-size: 1.35rem; font-weight: 800; color: #0f172a; display: flex; align-items: center; gap: 0.5rem;">
+            <i class="fa-solid fa-list-check" style="color: #059669;"></i>
             Recent Ingested Weather Records
         </h3>
         {% if recent_records %}
@@ -319,7 +319,7 @@
                         {% for rec in recent_records %}
                             <tr>
                                 <td>{{ rec.recorded_at|date:"Y-m-d H:i T" }} (Asia/Kolkata)</td>
-                                <td style="font-weight: 700; color: #fb923c;">{{ rec.temperature_c|temp_display:temp_unit }}</td>
+                                <td style="font-weight: 800; color: #ea580c;">{{ rec.temperature_c|temp_display:temp_unit }}</td>
                                 <td>{{ rec.relative_humidity }}%</td>
                                 <td>{% if rec.heat_index_c is not None %}<strong>{{ rec.heat_index_c|temp_display:temp_unit }}</strong>{% else %}Not available{% endif %}</td>
                                 <td>
@@ -342,7 +342,7 @@
         {% endif %}
     </div>
 
-    <div style="margin-top: 2.25rem; display: flex; gap: 0.85rem; flex-wrap: wrap;">
+    <div style="margin-top: 2.75rem; display: flex; gap: 1rem; flex-wrap: wrap;">
         <a href="{% url 'monitoring:city_search' %}" class="btn btn-secondary">
             <i class="fa-solid fa-arrow-left"></i> Back to Station Directory
         </a>

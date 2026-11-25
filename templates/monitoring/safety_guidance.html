@@ -6,64 +6,64 @@
 <div class="card">
     <div class="card-header">
         <div>
-            <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
-                <h2 style="margin: 0; font-size: 1.85rem; font-weight: 800; color: #ffffff;">
+            <div style="display: flex; align-items: center; gap: 0.85rem; flex-wrap: wrap;">
+                <h2 style="margin: 0; font-size: 2.2rem; font-weight: 800; color: #0f172a;">
                     Public Heat Safety & Thermal Health Guidance
                 </h2>
                 <span class="tag-provenance"><i class="fa-solid fa-heart-pulse"></i> public-health-guidance</span>
             </div>
-            <div style="font-size: 0.9rem; color: var(--color-text-muted); margin-top: 0.35rem;">
+            <div style="font-size: 1rem; color: #475569; margin-top: 0.45rem;">
                 Evidence-informed precautions for hot weather, vulnerable groups, and occupational settings
             </div>
         </div>
     </div>
 
     <!-- Critical Non-Diagnostic Medical Notice & Emergency Directive -->
-    <div class="alert alert-danger" style="margin-bottom: 2rem; font-size: 0.88rem;">
-        <i class="fa-solid fa-truck-medical alert-icon" style="color: #ef4444; font-size: 1.35rem;"></i>
+    <div class="alert alert-danger" style="margin-bottom: 2.25rem; font-size: 0.95rem; border: 2px solid #fca5a5;">
+        <i class="fa-solid fa-truck-medical alert-icon" style="color: #dc2626; font-size: 1.6rem;"></i>
         <div class="alert-body">
-            <h4 style="margin: 0 0 0.35rem; color: #fca5a5; font-size: 1.05rem; font-weight: 700;">
+            <h4 style="margin: 0 0 0.45rem; color: #991b1b; font-size: 1.15rem; font-weight: 800;">
                 Emergency Medical Notice & Critical Warning Signs
             </h4>
-            <p style="margin: 0 0 0.5rem; line-height: 1.5;">
+            <p style="margin: 0 0 0.65rem; line-height: 1.6; color: #7f1d1d;">
                 HeatGuard provides educational information and does <strong>not</strong> provide personalized medical advice or clinical diagnoses.
                 If you or someone around you exhibits signs of severe heat illness &mdash; including:
                 <strong>body temperature over 39.5°C (103°F)</strong>, <strong>loss of consciousness</strong>,
                 <strong>confusion or slurred speech</strong>, <strong>vomiting</strong>, or <strong>hot, red, dry skin</strong> &mdash;
                 <strong>CALL LOCAL EMERGENCY SERVICES (e.g. 108 / 112 / 911) IMMEDIATELY</strong>.
             </p>
-            <p style="margin: 0; font-size: 0.825rem; color: #fca5a5; border-top: 1px dashed rgba(239, 68, 68, 0.3); padding-top: 0.45rem;">
+            <p style="margin: 0; font-size: 0.9rem; color: #991b1b; border-top: 1px dashed #fca5a5; padding-top: 0.55rem;">
                 While awaiting emergency personnel: move the person into shade or air conditioning, loosen tight clothing, and apply cool, damp cloths or ice packs to the neck, armpits, and groin. Do NOT force liquids on an unconscious person.
             </p>
         </div>
     </div>
 
     <!-- Tiered Guidance by HeatGuard Risk Category -->
-    <div style="margin-bottom: 2.5rem;">
-        <h3 style="margin: 0 0 0.5rem; font-size: 1.35rem; font-weight: 800; color: #ffffff; display: flex; align-items: center; gap: 0.5rem;">
-            <i class="fa-solid fa-layer-group" style="color: #f97316;"></i> Precautions by HeatGuard Risk Category
+    <div style="margin-bottom: 2.75rem;">
+        <h3 style="margin: 0 0 0.65rem; font-size: 1.45rem; font-weight: 800; color: #0f172a; display: flex; align-items: center; gap: 0.5rem;">
+            <i class="fa-solid fa-layer-group" style="color: #ea580c;"></i> Precautions by HeatGuard Risk Category
         </h3>
-        <p style="font-size: 0.88rem; color: var(--color-text-muted); margin: 0 0 1.5rem;">
+        <p style="font-size: 0.95rem; color: #475569; margin: 0 0 1.75rem;">
             Review protective steps aligned with the Heat Index-based apparent temperature screening levels.
         </p>
 
         <div class="grid-2">
             {% for cat_key, guide in category_guidance.items %}
-                <div class="card dashboard-telemetry-card" style="margin-bottom: 0; border-top: 4px solid {% if cat_key == 'NORMAL' %}#10b981{% elif cat_key == 'CAUTION' %}#f59e0b{% elif cat_key == 'EXTREME_CAUTION' %}#f97316{% elif cat_key == 'DANGER' %}#dc2626{% else %}#7f1d1d{% endif %};">
-                    <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.65rem;">
-                        <h4 style="margin: 0; font-size: 1.1rem; font-weight: 700; color: #ffffff;">{{ guide.headline }}</h4>
+                <div class="card dashboard-telemetry-card" style="margin-bottom: 0; border-top: 5px solid {% if cat_key == 'NORMAL' %}#10b981{% elif cat_key == 'CAUTION' %}#f59e0b{% elif cat_key == 'EXTREME_CAUTION' %}#f97316{% elif cat_key == 'DANGER' %}#dc2626{% else %}#7f1d1d{% endif %};">
+                    <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.75rem;">
+                        <h4 style="margin: 0; font-size: 1.2rem; font-weight: 800; color: #0f172a;">{{ guide.headline }}</h4>
                         <span class="badge {% if cat_key == 'NORMAL' %}risk-low{% elif cat_key == 'CAUTION' %}risk-moderate{% elif cat_key == 'EXTREME_CAUTION' %}risk-high{% elif cat_key == 'DANGER' %}risk-very-high{% else %}risk-extreme{% endif %}">
                             {{ cat_key }}
                         </span>
                     </div>
-                    <p style="font-size: 0.85rem; color: var(--color-text-muted); margin: 0 0 0.85rem; line-height: 1.5;">
+                    <p style="font-size: 0.92rem; color: #475569; margin: 0 0 1rem; line-height: 1.6;">
                         {{ guide.summary }}
                     </p>
-                    <ul style="font-size: 0.85rem; margin: 0; padding-left: 1.25rem; color: var(--color-text-main); line-height: 1.6;">
-                        <li style="margin-bottom: 0.35rem;"><strong>Hydration:</strong> {{ guide.hydration }}</li>
-                        <li style="margin-bottom: 0.35rem;"><strong>Shade & Rest:</strong> {{ guide.shade_and_rest }}</li>
-                        <li style="margin-bottom: 0.35rem;"><strong>Outdoor Work:</strong> {{ guide.outdoor_activity }}</li>
-                        <li style="margin-bottom: 0.35rem;"><strong>Vulnerable Care:</strong> {{ guide.vulnerable_care }}</li>
+                    <ul style="font-size: 0.92rem; margin: 0; padding-left: 1.4rem; color: #0f172a; line-height: 1.7;">
+                        <li style="margin-bottom: 0.45rem;"><strong>Hydration:</strong> {{ guide.hydration }}</li>
+                        <li style="margin-bottom: 0.45rem;"><strong>Shade & Rest:</strong> {{ guide.shade_and_rest }}</li>
+                        <li style="margin-bottom: 0.45rem;"><strong>Outdoor Work:</strong> {{ guide.outdoor_activity }}</li>
+                        <li style="margin-bottom: 0.45rem;"><strong>Vulnerable Care:</strong> {{ guide.vulnerable_care }}</li>
                         <li><strong>Warning Signs:</strong> {{ guide.warning_signs }}</li>
                     </ul>
                 </div>
@@ -72,27 +72,27 @@
     </div>
 
     <!-- Targeted Guidance for Vulnerable Groups -->
-    <div style="margin-bottom: 2.5rem;">
-        <h3 style="margin: 0 0 0.5rem; font-size: 1.35rem; font-weight: 800; color: #ffffff; display: flex; align-items: center; gap: 0.5rem;">
-            <i class="fa-solid fa-users-viewfinder" style="color: #38bdf8;"></i> Protective Recommendations for High-Risk Groups
+    <div style="margin-bottom: 2.75rem;">
+        <h3 style="margin: 0 0 0.65rem; font-size: 1.45rem; font-weight: 800; color: #0f172a; display: flex; align-items: center; gap: 0.5rem;">
+            <i class="fa-solid fa-users-viewfinder" style="color: #059669;"></i> Protective Recommendations for High-Risk Groups
         </h3>
-        <p style="font-size: 0.88rem; color: var(--color-text-muted); margin: 0 0 1.5rem;">
+        <p style="font-size: 0.95rem; color: #475569; margin: 0 0 1.75rem;">
             Special considerations for infants, elderly individuals, outdoor workers, and patients with chronic health conditions.
         </p>
 
         <div class="grid-2">
             {% for group in group_guidance %}
-                <div class="card dashboard-telemetry-card" style="margin-bottom: 0;">
-                    <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.65rem;">
-                        <h4 style="margin: 0; font-size: 1.1rem; font-weight: 700; color: #ffffff;">{{ group.group_name }}</h4>
+                <div class="card dashboard-telemetry-card" style="margin-bottom: 0; border-top: 4px solid #10b981;">
+                    <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.75rem;">
+                        <h4 style="margin: 0; font-size: 1.2rem; font-weight: 800; color: #0f172a;">{{ group.group_name }}</h4>
                         <span class="tag-provenance">{{ group.badge }}</span>
                     </div>
-                    <ul style="font-size: 0.85rem; margin: 0 0 0.85rem; padding-left: 1.25rem; color: var(--color-text-main); line-height: 1.6;">
+                    <ul style="font-size: 0.92rem; margin: 0 0 1rem; padding-left: 1.4rem; color: #0f172a; line-height: 1.7;">
                         {% for pt in group.key_points %}
-                            <li style="margin-bottom: 0.35rem;">{{ pt }}</li>
+                            <li style="margin-bottom: 0.45rem;">{{ pt }}</li>
                         {% endfor %}
                     </ul>
-                    <div style="font-size: 0.825rem; background: rgba(15, 23, 42, 0.7); border: 1px solid var(--color-border); border-radius: var(--radius-sm); padding: 0.65rem 0.85rem; color: #fb923c;">
+                    <div style="font-size: 0.9rem; background: #fff7ed; border: 1px solid #fed7aa; border-radius: var(--radius-sm); padding: 0.75rem 1rem; color: #c2410c; font-weight: 600;">
                         <strong><i class="fa-solid fa-triangle-exclamation"></i> Key Priority:</strong> {{ group.emergency_action }}
                     </div>
                 </div>
@@ -101,30 +101,30 @@
     </div>
 
     <!-- Reliable Official Public Health Resources -->
-    <div style="margin-top: 2.5rem;">
-        <h3 style="margin: 0 0 0.5rem; font-size: 1.35rem; font-weight: 800; color: #ffffff; display: flex; align-items: center; gap: 0.5rem;">
-            <i class="fa-solid fa-building-columns" style="color: #a78bfa;"></i> Official Public Health Authorities & Resources
+    <div style="margin-top: 2.75rem;">
+        <h3 style="margin: 0 0 0.65rem; font-size: 1.45rem; font-weight: 800; color: #0f172a; display: flex; align-items: center; gap: 0.5rem;">
+            <i class="fa-solid fa-building-columns" style="color: #0284c7;"></i> Official Public Health Authorities & Resources
         </h3>
-        <p style="font-size: 0.88rem; color: var(--color-text-muted); margin: 0 0 1.25rem;">
+        <p style="font-size: 0.95rem; color: #475569; margin: 0 0 1.5rem;">
             Consult recognized global and national health organizations for clinical protocols, regional action plans, and official alerts:
         </p>
 
         <div class="grid-2">
             {% for resource in health_resources %}
-                <div class="card dashboard-telemetry-card" style="margin-bottom: 0; padding: 1.25rem;">
-                    <div style="font-weight: 700; font-size: 1rem; color: #ffffff;">{{ resource.agency }}</div>
-                    <div style="font-size: 0.85rem; color: var(--color-text-muted); margin: 0.35rem 0 0.75rem; line-height: 1.5;">
+                <div class="card dashboard-telemetry-card" style="margin-bottom: 0; padding: 1.5rem; border-left: 4px solid #0284c7;">
+                    <div style="font-weight: 800; font-size: 1.1rem; color: #0f172a;">{{ resource.agency }}</div>
+                    <div style="font-size: 0.92rem; color: #475569; margin: 0.45rem 0 0.85rem; line-height: 1.6;">
                         {{ resource.description }}
                     </div>
-                    <a href="{{ resource.url }}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="font-size: 0.78rem; padding: 0.3rem 0.75rem;">
-                        {{ resource.title }} <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.7rem;"></i>
+                    <a href="{{ resource.url }}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="font-size: 0.82rem; padding: 0.35rem 0.85rem;">
+                        {{ resource.title }} <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.75rem;"></i>
                     </a>
                 </div>
             {% endfor %}
         </div>
     </div>
 
-    <div style="margin-top: 2.5rem; display: flex; gap: 0.85rem;">
+    <div style="margin-top: 2.75rem; display: flex; gap: 1rem;">
         <a href="{% url 'monitoring:home' %}" class="btn btn-secondary">
             <i class="fa-solid fa-arrow-left"></i> Back to Home
         </a>
