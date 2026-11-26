@@ -21,23 +21,17 @@ DEFAULT_TIMEOUT_SECONDS = 12.0
 def _urlopen(req, timeout):
     """
     Executes urllib.request.urlopen with normal TLS certificate verification.
-    Ensures system and OS default CA certificates (including Windows Root Store
-    and certifi bundle) are loaded into the SSL context.
+    Prefers certifi's official CA bundle to avoid Windows certificate store self-signed chain issues.
     """
     context = None
     try:
-        context = ssl.create_default_context()
-        try:
-            context.load_default_certs()
-        except Exception:
-            pass
-        try:
-            import certifi
-            context.load_verify_locations(cafile=certifi.where())
-        except Exception:
-            pass
+        import certifi
+        context = ssl.create_default_context(cafile=certifi.where())
     except Exception:
-        context = None
+        try:
+            context = ssl.create_default_context()
+        except Exception:
+            context = None
     if context is not None:
         return urllib.request.urlopen(req, timeout=timeout, context=context)
     return urllib.request.urlopen(req, timeout=timeout)

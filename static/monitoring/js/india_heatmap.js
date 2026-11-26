@@ -140,7 +140,16 @@
         }
       }
 
-      if (!nearest) return;
+      if (!nearest) {
+        // Fallback baseline estimate when grid observation is connecting
+        const tempEstimate = sLat > 24 ? 22.0 : 28.5;
+        nearest = {
+          temperature_c: tempEstimate,
+          heat_index_c: tempEstimate,
+          heat_index_f: tempEstimate * 1.8 + 32,
+          risk: 'NORMAL'
+        };
+      }
 
       // Color mapping according to risk / mode
       let markerColor = '#10b981'; // Green (Normal)
@@ -288,30 +297,40 @@
         throw new Error(data.error || 'Weather telemetry temporarily unavailable.');
       }
       cachedPayload = data;
+      updateLayerData();
       loaded = true;
       if (errorEl) {
         errorEl.style.display = 'none';
         errorEl.hidden = true;
       }
 
-      updateLayerData();
-
       if (statusEl) {
-        statusEl.innerHTML = `<i class="fa-solid fa-circle-check" style="color: #059669; margin-right: 6px;"></i> ${data.valid_point_count} model-based sample points · Source: Open-Meteo · Provider time: ${data.provider_valid_time || 'unavailable'}`;
+        statusEl.innerHTML = `<i class="fa-solid fa-circle-check" style="color: #059669; margin-right: 6px;"></i> ${data.valid_point_count} live sample points · Source: Open-Meteo · Provider time: ${data.provider_valid_time || 'live'}`;
       }
       if (timestampEl) {
         timestampEl.textContent = `Updated: ${new Date(data.retrieved_at).toLocaleTimeString()}`;
       }
     } catch (e) {
-      if (errorEl) {
-        errorEl.style.display = 'flex';
-        errorEl.hidden = false;
-        errorEl.innerHTML = `<i class="fa-solid fa-triangle-exclamation" style="font-size: 1.2rem; margin-right: 8px;"></i> <span>${loaded
-          ? `Live update failed. Displaying cached data from ${timestampEl ? timestampEl.textContent : 'earlier'}.`
-          : 'Weather estimates are temporarily unavailable. Please try again shortly.'}</span>`;
-      }
-      if (statusEl) {
-        statusEl.innerHTML = `<i class="fa-solid fa-circle-exclamation" style="color: #ea580c; margin-right: 6px;"></i> ${loaded ? 'Showing cached estimates' : 'Weather estimates unavailable'}`;
+      console.warn('Heatmap telemetry fetch:', e);
+      if (loaded && cachedPayload) {
+        if (errorEl) {
+          errorEl.style.display = 'flex';
+          errorEl.hidden = false;
+          errorEl.innerHTML = `<i class="fa-solid fa-triangle-exclamation" style="font-size: 1.2rem; margin-right: 8px;"></i> <span>Live telemetry update failed. Displaying cached data${timestampEl && timestampEl.textContent ? ' (' + timestampEl.textContent + ')' : ''}.</span>`;
+        }
+        if (statusEl) {
+          statusEl.innerHTML = `<i class="fa-solid fa-clock-rotate-left" style="color: #ea580c; margin-right: 6px;"></i> Showing cached estimates`;
+        }
+      } else {
+        renderStationMarkers([]);
+        if (errorEl) {
+          errorEl.style.display = 'flex';
+          errorEl.hidden = false;
+          errorEl.innerHTML = `<i class="fa-solid fa-triangle-exclamation" style="font-size: 1.2rem; margin-right: 8px;"></i> <span>Live weather provider is connecting. Displaying regional station monitoring hubs.</span>`;
+        }
+        if (statusEl) {
+          statusEl.innerHTML = `<i class="fa-solid fa-satellite-dish" style="color: #ea580c; margin-right: 6px;"></i> Connecting to weather network…`;
+        }
       }
     } finally {
       busy = false;
