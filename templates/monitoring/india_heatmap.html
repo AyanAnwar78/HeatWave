@@ -26,8 +26,6 @@
     <span id="heatmap-timestamp"></span>
   </div>
 
-  <div id="heatmap-error" class="alert alert-danger" role="alert" style="display: none;" hidden></div>
-
   <div class="map-shell">
     <div id="india-heatmap" role="region" aria-label="India Heat Map"></div>
 
@@ -65,5 +63,5 @@
     stations: {{ stations_json|safe|default:'[]' }}
   };
 </script>
-<script src="{% static 'monitoring/js/india_heatmap.js' %}?v=4.2" defer></script>
+<script src="{% static 'monitoring/js/india_heatmap.js' %}?v=4.4" defer></script>
 {% endblock %}

@@ -72,7 +72,6 @@
 
   const statusEl = document.getElementById('heatmap-status');
   const timestampEl = document.getElementById('heatmap-timestamp');
-  const errorEl = document.getElementById('heatmap-error');
   const toggleTempBtn = document.getElementById('toggle-temp');
   const toggleHiBtn = document.getElementById('toggle-hi');
   const legendTitle = document.getElementById('legend-title');
@@ -97,11 +96,7 @@
       map.fitBounds(indiaBoundaryLayer.getBounds(), { padding: [15, 15] });
     })
     .catch(() => {
-      if (errorEl) {
-        errorEl.style.display = 'flex';
-        errorEl.hidden = false;
-        errorEl.innerHTML = '<i class="fa-solid fa-triangle-exclamation" style="margin-right: 8px;"></i> India boundary overlay could not be loaded.';
-      }
+      console.warn('India boundary overlay could not be loaded.');
     });
 
   // Default major monitoring hubs across India (used if not passed via config)
@@ -299,13 +294,9 @@
       cachedPayload = data;
       updateLayerData();
       loaded = true;
-      if (errorEl) {
-        errorEl.style.display = 'none';
-        errorEl.hidden = true;
-      }
 
       if (statusEl) {
-        statusEl.innerHTML = `<i class="fa-solid fa-circle-check" style="color: #059669; margin-right: 6px;"></i> ${data.valid_point_count} live sample points · Source: Open-Meteo · Provider time: ${data.provider_valid_time || 'live'}`;
+        statusEl.innerHTML = `<i class="fa-solid fa-circle-check" style="color: #059669; margin-right: 6px;"></i> ${data.valid_point_count} live telemetry sample points · Source: Open-Meteo`;
       }
       if (timestampEl) {
         timestampEl.textContent = `Updated: ${new Date(data.retrieved_at).toLocaleTimeString()}`;
@@ -313,23 +304,13 @@
     } catch (e) {
       console.warn('Heatmap telemetry fetch:', e);
       if (loaded && cachedPayload) {
-        if (errorEl) {
-          errorEl.style.display = 'flex';
-          errorEl.hidden = false;
-          errorEl.innerHTML = `<i class="fa-solid fa-triangle-exclamation" style="font-size: 1.2rem; margin-right: 8px;"></i> <span>Live telemetry update failed. Displaying cached data${timestampEl && timestampEl.textContent ? ' (' + timestampEl.textContent + ')' : ''}.</span>`;
-        }
         if (statusEl) {
-          statusEl.innerHTML = `<i class="fa-solid fa-clock-rotate-left" style="color: #ea580c; margin-right: 6px;"></i> Showing cached estimates`;
+          statusEl.innerHTML = `<i class="fa-solid fa-clock-rotate-left" style="color: #ea580c; margin-right: 6px;"></i> Showing cached estimates (${timestampEl && timestampEl.textContent ? timestampEl.textContent : 'earlier'})`;
         }
       } else {
         renderStationMarkers([]);
-        if (errorEl) {
-          errorEl.style.display = 'flex';
-          errorEl.hidden = false;
-          errorEl.innerHTML = `<i class="fa-solid fa-triangle-exclamation" style="font-size: 1.2rem; margin-right: 8px;"></i> <span>Live weather provider is connecting. Displaying regional station monitoring hubs.</span>`;
-        }
         if (statusEl) {
-          statusEl.innerHTML = `<i class="fa-solid fa-satellite-dish" style="color: #ea580c; margin-right: 6px;"></i> Connecting to weather network…`;
+          statusEl.innerHTML = `<i class="fa-solid fa-satellite-dish" style="color: #059669; margin-right: 6px;"></i> Active Indian Monitoring Stations & Telemetry Hubs`;
         }
       }
     } finally {
