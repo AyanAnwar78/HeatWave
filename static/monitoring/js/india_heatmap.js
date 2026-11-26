@@ -98,8 +98,9 @@
     })
     .catch(() => {
       if (errorEl) {
+        errorEl.style.display = 'flex';
         errorEl.hidden = false;
-        errorEl.textContent = 'India boundary overlay could not be loaded.';
+        errorEl.innerHTML = '<i class="fa-solid fa-triangle-exclamation" style="margin-right: 8px;"></i> India boundary overlay could not be loaded.';
       }
     });
 
@@ -275,7 +276,9 @@
   async function refresh(manual = false) {
     if (busy || (document.hidden && !manual)) return;
     busy = true;
-    if (statusEl) statusEl.textContent = 'Fetching the latest model-based weather estimates across India…';
+    if (statusEl) {
+      statusEl.innerHTML = '<i class="fa-solid fa-spinner fa-spin" style="color: #059669; margin-right: 6px;"></i> Fetching the latest model-based weather estimates across India…';
+    }
     try {
       const response = await fetch(config.dataUrl, {
         headers: { 'Accept': 'application/json' }
@@ -286,25 +289,29 @@
       }
       cachedPayload = data;
       loaded = true;
-      if (errorEl) errorEl.hidden = true;
+      if (errorEl) {
+        errorEl.style.display = 'none';
+        errorEl.hidden = true;
+      }
 
       updateLayerData();
 
       if (statusEl) {
-        statusEl.textContent = `${data.valid_point_count} model-based sample points · Source: Open-Meteo · Provider time: ${data.provider_valid_time || 'unavailable'}`;
+        statusEl.innerHTML = `<i class="fa-solid fa-circle-check" style="color: #059669; margin-right: 6px;"></i> ${data.valid_point_count} model-based sample points · Source: Open-Meteo · Provider time: ${data.provider_valid_time || 'unavailable'}`;
       }
       if (timestampEl) {
         timestampEl.textContent = `Updated: ${new Date(data.retrieved_at).toLocaleTimeString()}`;
       }
     } catch (e) {
       if (errorEl) {
+        errorEl.style.display = 'flex';
         errorEl.hidden = false;
-        errorEl.textContent = loaded
+        errorEl.innerHTML = `<i class="fa-solid fa-triangle-exclamation" style="font-size: 1.2rem; margin-right: 8px;"></i> <span>${loaded
           ? `Live update failed. Displaying cached data from ${timestampEl ? timestampEl.textContent : 'earlier'}.`
-          : 'Weather estimates are temporarily unavailable. Please try again shortly.';
+          : 'Weather estimates are temporarily unavailable. Please try again shortly.'}</span>`;
       }
       if (statusEl) {
-        statusEl.textContent = loaded ? 'Showing cached estimates' : 'Weather estimates unavailable';
+        statusEl.innerHTML = `<i class="fa-solid fa-circle-exclamation" style="color: #ea580c; margin-right: 6px;"></i> ${loaded ? 'Showing cached estimates' : 'Weather estimates unavailable'}`;
       }
     } finally {
       busy = false;

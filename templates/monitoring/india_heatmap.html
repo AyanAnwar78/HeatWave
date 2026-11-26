@@ -22,11 +22,11 @@
   </div>
 
   <div class="heatmap-status" aria-live="polite">
-    <span id="heatmap-status">Fetching live weather telemetry across India…</span>
+    <span id="heatmap-status"><i class="fa-solid fa-spinner fa-spin" style="color: #059669; margin-right: 6px;"></i> Fetching live weather telemetry across India…</span>
     <span id="heatmap-timestamp"></span>
   </div>
 
-  <div id="heatmap-error" class="alert alert-danger" role="alert" hidden></div>
+  <div id="heatmap-error" class="alert alert-danger" role="alert" style="display: none;" hidden></div>
 
   <div class="map-shell">
     <div id="india-heatmap" role="region" aria-label="India Heat Map"></div>
@@ -65,5 +65,5 @@
     stations: {{ stations_json|safe|default:'[]' }}
   };
 </script>
-<script src="{% static 'monitoring/js/india_heatmap.js' %}?v=4.0" defer></script>
+<script src="{% static 'monitoring/js/india_heatmap.js' %}?v=4.1" defer></script>
 {% endblock %}

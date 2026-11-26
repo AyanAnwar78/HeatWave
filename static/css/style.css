@@ -730,6 +730,10 @@ p {
     padding: 0 1.75rem;
 }
 
+[hidden] {
+    display: none !important;
+}
+
 .alert {
     padding: 1.15rem 1.5rem;
     border-radius: var(--radius-md);
@@ -739,6 +743,10 @@ p {
     gap: 1rem;
     font-size: 0.95rem;
     box-shadow: var(--shadow-sm);
+}
+
+.alert[hidden] {
+    display: none !important;
 }
 
 .alert-icon {
